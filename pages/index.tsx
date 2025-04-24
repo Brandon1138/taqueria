@@ -330,7 +330,7 @@ const Home: React.FC<HomeProps> = ({ featuredProducts }) => {
 
 						<div className="flex flex-col items-center">
 							<div
-								className="relative overflow-hidden rounded-lg transform transition-all hover:scale-105 shadow-xl 
+								className="relative overflow-visible rounded-lg transform transition-all hover:scale-105 shadow-xl 
 								w-full bg-gradient-to-br from-red-900 to-neutral-900 p-8 mb-8"
 								style={{
 									backgroundImage:
@@ -340,6 +340,15 @@ const Home: React.FC<HomeProps> = ({ featuredProducts }) => {
 										'inset 0 0 0 2px rgba(255,255,255,0.1), 0 4px 10px rgba(0,0,0,0.3)',
 								}}
 							>
+								<div className="absolute top-0 right-0 rotate-12 transform translate-x-8 -translate-y-4 z-10">
+									<div
+										className="bg-red-600 text-white py-2 px-8 shadow-lg font-bold uppercase tracking-wider text-sm transform -rotate-6"
+										style={{ fontFamily: "'Courier New', monospace" }}
+									>
+										Special Offer
+									</div>
+								</div>
+
 								<div className="flex flex-col md:flex-row items-center justify-between">
 									{/* Text Content */}
 									<div className="md:w-1/2 text-center md:text-left mb-8 md:mb-0 md:pr-8">
@@ -442,6 +451,160 @@ const Home: React.FC<HomeProps> = ({ featuredProducts }) => {
 										{/* Decorative elements */}
 										<div className="absolute -top-4 -right-4 w-16 h-16 bg-amber-300 rounded-full opacity-30 transform rotate-12"></div>
 										<div className="absolute bottom-8 -left-6 w-12 h-12 bg-red-700 rounded-full opacity-20"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					{/* Happy Hour Promotion Section */}
+					<div className="mt-16">
+						<h2
+							className="text-3xl font-bold text-center mb-8 text-white"
+							style={{ textShadow: '1px 1px 0 rgba(0,0,0,0.3)' }}
+						>
+							Happy Hour
+						</h2>
+
+						<div className="flex flex-col items-center">
+							<div
+								className="relative overflow-visible rounded-lg transform transition-all hover:scale-105 shadow-xl 
+								w-full bg-gradient-to-br from-red-900 to-neutral-900 p-8 mb-8"
+								style={{
+									backgroundImage:
+										"url('https://www.transparenttextures.com/patterns/concrete-wall.png')",
+									borderRadius: '0.75rem',
+									boxShadow:
+										'inset 0 0 0 2px rgba(255,255,255,0.1), 0 4px 10px rgba(0,0,0,0.3)',
+								}}
+							>
+								<div className="absolute top-0 right-0 rotate-12 transform translate-x-8 -translate-y-4 z-10">
+									<div
+										className="bg-red-600 text-white py-2 px-8 shadow-lg font-bold uppercase tracking-wider text-sm transform -rotate-6"
+										style={{ fontFamily: "'Courier New', monospace" }}
+									>
+										Special Offer
+									</div>
+								</div>
+
+								<div className="flex flex-col md:flex-row items-center justify-between">
+									{/* Left Side - Promo Image */}
+									<div className="md:w-1/2 flex justify-center relative mb-8 md:mb-0">
+										<div className="relative">
+											{/* Decorative Background */}
+											<div className="absolute -inset-4 bg-neutral-800 rounded-full opacity-20 blur-sm"></div>
+
+											{/* Circle Background */}
+											<div className="relative flex justify-center items-center">
+												{/* Cocktail on the left */}
+												<div className="absolute -left-10 bottom-[-50px] transform -rotate-6 z-10">
+													<div className="relative h-64 w-40">
+														<Image
+															src="/images/cocktail.webp"
+															alt="Cocktail"
+															width={160}
+															height={256}
+															style={{ objectFit: 'contain' }}
+														/>
+													</div>
+												</div>
+
+												{/* Dark background for 50% OFF */}
+												<div className="bg-neutral-800 w-48 h-48 rounded-full flex items-center justify-center z-0 relative mt-16">
+													<div className="absolute inset-0 flex items-center justify-center">
+														<div
+															className="text-5xl text-white font-extrabold z-0"
+															style={{
+																fontFamily: "'Courier New', monospace",
+																textShadow: '2px 2px 0 rgba(139, 0, 0, 0.5)',
+															}}
+														>
+															<div className="relative">
+																<div className="text-6xl">50%</div>
+																<div className="text-5xl ml-8">OFF</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												{/* Corona on the right */}
+												<div className="absolute -right-6 bottom-0 transform rotate-12 z-10">
+													<div className="relative h-56 w-28">
+														<Image
+															src="/images/corona.webp"
+															alt="Beer"
+															width={112}
+															height={224}
+															style={{ objectFit: 'contain' }}
+														/>
+													</div>
+												</div>
+											</div>
+
+											{/* Happy Hour Text - moved to be on top */}
+											<div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-64 z-20">
+												<h3
+													className="text-white text-3xl font-extrabold text-center"
+													style={{
+														fontFamily: 'cursive',
+														textShadow: '2px 2px 0 rgba(0,0,0,0.5)',
+													}}
+												>
+													Happy Hour
+												</h3>
+												<div className="text-sm text-center text-gray-300 mt-1">
+													Monday - Friday
+												</div>
+												<div className="text-xs text-center text-gray-400 mt-1">
+													FROM 4:00 PM - 8 PM
+												</div>
+											</div>
+
+											{/* Footer Text - repositioned and z-index increased */}
+											<div className="relative mt-4 w-full text-center z-20">
+												<div
+													className="text-xs text-gray-400 font-medium uppercase tracking-wider"
+													style={{ fontFamily: "'Courier New', monospace" }}
+												>
+													BRING YOUR FRIENDS, NOT YOUR PROBLEMS
+												</div>
+												<div className="flex justify-center mt-2">
+													<div className="w-8 h-1 bg-red-900 rounded-full mx-1"></div>
+													<div className="w-1 h-1 bg-red-900 rounded-full mx-1"></div>
+													<div className="w-1 h-1 bg-red-900 rounded-full mx-1"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									{/* Right Side - Text Content */}
+									<div className="md:w-1/2 text-center md:text-left md:pl-8">
+										<div
+											className="inline-block mb-4 text-red-600 font-extrabold text-5xl"
+											style={{
+												textShadow: '1px 1px 0 rgba(255,255,255,0.1)',
+											}}
+										>
+											50% Reducere
+										</div>
+										<h3 className="text-gray-200 text-4xl font-bold mb-6">
+											Happy Hour
+										</h3>
+										<p className="text-gray-300 mb-6 leading-relaxed">
+											From Monday to Friday between 16:00-20:00PM, enjoy all
+											your favorite drinks at half price. Perfect time to unwind
+											after work with friends!
+										</p>
+										<a
+											href="/menu"
+											className="inline-flex items-center bg-red-800 text-white px-6 py-3 rounded-md font-bold 
+											hover:bg-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none 
+											transition-colors transform hover:-translate-y-0.5 shadow-md border border-red-700
+											uppercase tracking-wide"
+											style={{ fontFamily: "'Courier New', monospace" }}
+										>
+											Order now
+										</a>
 									</div>
 								</div>
 							</div>
