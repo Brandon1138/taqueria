@@ -7,6 +7,7 @@ interface ToastContextProps {
 		type?: 'success' | 'error' | 'info',
 		duration?: number
 	) => void;
+	removeToast: (id: string) => void;
 }
 
 const ToastContext = createContext<ToastContextProps | undefined>(undefined);
@@ -38,8 +39,16 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
 		type: 'success' | 'error' | 'info' = 'success',
 		duration: number = 3000
 	) => {
-		const id = Math.random().toString(36).substring(2, 9);
-		setToasts((prev) => [...prev, { id, message, type, duration }]);
+		// Check if we already have a toast with this message and type
+		const hasDuplicateToast = toasts.some(
+			(toast) => toast.message === message && toast.type === type
+		);
+
+		// Only add the toast if it's not a duplicate
+		if (!hasDuplicateToast) {
+			const id = Math.random().toString(36).substring(2, 9);
+			setToasts((prev) => [...prev, { id, message, type, duration }]);
+		}
 	};
 
 	const removeToast = (id: string) => {
@@ -47,7 +56,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
 	};
 
 	return (
-		<ToastContext.Provider value={{ showToast }}>
+		<ToastContext.Provider value={{ showToast, removeToast }}>
 			{children}
 			<div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
 				{toasts.map((toast) => (

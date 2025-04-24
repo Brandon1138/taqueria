@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
 import { useCart } from '../lib/cartContext';
@@ -7,14 +6,52 @@ import { useToast } from '../components/ToastProvider';
 
 const Thanks: React.FC = () => {
 	const router = useRouter();
-	const { clearCart } = useCart();
-	const { showToast } = useToast();
+	const { clearCart, items, updateQuantity } = useCart();
+	const { showToast, removeToast } = useToast();
+	const [toastId, setToastId] = useState<string | null>(null);
 
-	// Clear cart on successful payment
+	// Clear cart on successful payment and show toast
 	useEffect(() => {
-		clearCart();
-		showToast('Order completed successfully!', 'success', 5000);
-	}, [clearCart, showToast]);
+		// Silently clear the cart without triggering toast notifications
+		// by removing each item individually without notifications
+		if (items.length > 0) {
+			// Clear items without triggering toasts
+			items.forEach((item) => {
+				updateQuantity(item.product.id, 0);
+			});
+		}
+
+		// Show only one success toast
+		if (!toastId) {
+			const id = Math.random().toString(36).substring(2, 9);
+			setToastId(id);
+			showToast('Order completed successfully!', 'success', 8000);
+		}
+
+		// Clean up function to remove toast when leaving page
+		return () => {
+			if (toastId) {
+				removeToast(toastId);
+			}
+		};
+	}, [items, updateQuantity, showToast, removeToast, toastId]);
+
+	// Navigation handlers with explicit navigation
+	const goToMenu = () => {
+		if (toastId) {
+			removeToast(toastId);
+		}
+		// Force navigation to menu page
+		window.location.href = '/menu';
+	};
+
+	const goToHome = () => {
+		if (toastId) {
+			removeToast(toastId);
+		}
+		// Force navigation to home page
+		window.location.href = '/';
+	};
 
 	return (
 		<Layout>
@@ -43,18 +80,18 @@ const Thanks: React.FC = () => {
 				</p>
 
 				<div className="flex flex-col md:flex-row justify-center gap-4">
-					<Link
-						href="/menu"
+					<button
+						onClick={goToMenu}
 						className="bg-red-900 text-white px-6 py-3 rounded-md font-semibold hover:bg-red-800 transition-colors"
 					>
 						Order More Food
-					</Link>
-					<Link
-						href="/"
+					</button>
+					<button
+						onClick={goToHome}
 						className="border-2 border-red-900 text-red-900 px-6 py-3 rounded-md font-semibold hover:bg-red-900 hover:text-white transition-colors"
 					>
 						Back to Home
-					</Link>
+					</button>
 				</div>
 			</div>
 		</Layout>

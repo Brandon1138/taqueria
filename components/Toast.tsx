@@ -26,6 +26,13 @@ const Toast: React.FC<ToastProps> = ({
 		return () => clearTimeout(timer);
 	}, [duration, onClose]);
 
+	const handleClose = () => {
+		setVisible(false);
+		setTimeout(() => {
+			onClose();
+		}, 300);
+	};
+
 	// Define styles based on type
 	let bgColor = 'bg-green-500';
 	let icon = (
@@ -85,19 +92,18 @@ const Toast: React.FC<ToastProps> = ({
 
 	return (
 		<div
-			className={`fixed bottom-4 right-4 flex items-center p-4 rounded-lg shadow-lg text-white ${bgColor} transform transition-all duration-300 ${
+			className={`flex items-center p-4 rounded-lg shadow-lg text-white ${bgColor} transform transition-all duration-300 ${
 				visible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
 			}`}
+			role="alert"
 		>
 			<div className="mr-2">{icon}</div>
 			<div className="font-medium">{message}</div>
 			<button
-				onClick={() => {
-					setVisible(false);
-					setTimeout(onClose, 300);
-				}}
-				className="ml-4 text-white focus:outline-none"
+				onClick={handleClose}
+				className="ml-4 text-white bg-white bg-opacity-20 rounded-full p-1 focus:outline-none hover:bg-opacity-30"
 				aria-label="Close notification"
+				type="button"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
