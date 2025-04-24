@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 import Layout from '../components/Layout';
 import CartItem from '../components/CartItem';
 import { useCart } from '../lib/cartContext';
@@ -8,7 +9,10 @@ const Cart: React.FC = () => {
 	const { items, total, clearCart } = useCart();
 
 	return (
-		<Layout fullWidth={false}>
+		<Layout>
+			<Head>
+				<title>Your Cart - Taqueria</title>
+			</Head>
 			<div className="max-w-4xl mx-auto">
 				<h1 className="text-3xl font-bold mb-8">Your Cart</h1>
 

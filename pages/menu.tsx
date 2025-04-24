@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
+import Head from 'next/head';
 import Layout from '../components/Layout';
 import ProductCard from '../components/ProductCard';
 import { Product } from '../domain/models/Product';
@@ -34,7 +35,10 @@ const Menu: React.FC<MenuProps> = ({ products, categories }) => {
 		: products;
 
 	return (
-		<Layout fullWidth={true}>
+		<Layout>
+			<Head>
+				<title>Menu - Taqueria Mexican Street Food</title>
+			</Head>
 			<div
 				className="bg-neutral-900 py-16 w-full"
 				style={{

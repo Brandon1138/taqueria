@@ -2,6 +2,7 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import Head from 'next/head';
 import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import { Product } from '../domain/models/Product';
@@ -80,6 +81,9 @@ const Home: React.FC<HomeProps> = ({ featuredProducts }) => {
 
 	return (
 		<Layout fullWidth={true}>
+			<Head>
+				<title>Taqueria - Authentic Mexican Street Food</title>
+			</Head>
 			{/* Hero Section */}
 			<Hero />
 
@@ -610,7 +614,200 @@ const Home: React.FC<HomeProps> = ({ featuredProducts }) => {
 							</div>
 						</div>
 					</div>
+
+					{/* Contact Section - Full width */}
+					<div className="mt-16 w-full bg-neutral-900">
+						<div className="max-w-6xl mx-auto px-4 pb-0">
+							<h2
+								className="text-3xl font-bold text-center mb-2 text-red-600 italic"
+								style={{ textShadow: '1px 1px 0 rgba(0,0,0,0.3)' }}
+							>
+								Do you have questions?
+							</h2>
+							<h3
+								className="text-4xl font-bold text-center mb-8 text-white"
+								style={{ textShadow: '1px 1px 0 rgba(0,0,0,0.3)' }}
+							>
+								Contact us
+							</h3>
+
+							<p className="text-center text-gray-300 mb-8">
+								Write or call us!
+							</p>
+
+							{/* Contact buttons - moved above the map */}
+							<div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-12">
+								<a
+									href="tel:+40721234567"
+									className="inline-flex items-center bg-neutral-800 text-white px-6 py-3 rounded-md font-bold 
+									hover:bg-neutral-700 focus:ring-2 focus:ring-neutral-700 focus:outline-none 
+									transition-colors transform hover:-translate-y-0.5 shadow-md border border-neutral-700
+									uppercase tracking-wide"
+									style={{ fontFamily: "'Courier New', monospace" }}
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-5 w-5 mr-2"
+										viewBox="0 0 20 20"
+										fill="currentColor"
+									>
+										<path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+									</svg>
+									Call Now
+								</a>
+								<a
+									href="mailto:contact@taqueria.ro"
+									className="inline-flex items-center bg-red-800 text-white px-6 py-3 rounded-md font-bold 
+									hover:bg-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none 
+									transition-colors transform hover:-translate-y-0.5 shadow-md border border-red-700
+									uppercase tracking-wide"
+									style={{ fontFamily: "'Courier New', monospace" }}
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-5 w-5 mr-2"
+										viewBox="0 0 20 20"
+										fill="currentColor"
+									>
+										<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+										<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+									</svg>
+									Email Us
+								</a>
+							</div>
+
+							{/* Weekly Schedule Table */}
+							<div className="mx-auto max-w-3xl mb-0">
+								<h3
+									className="text-2xl font-bold text-center mb-6 text-amber-300"
+									style={{ textShadow: '1px 1px 0 rgba(0,0,0,0.3)' }}
+								>
+									Our Opening Hours
+								</h3>
+
+								<div className="relative overflow-hidden rounded-lg shadow-xl">
+									{/* Background with texture */}
+									<div
+										className="absolute inset-0 bg-neutral-800 rounded-lg"
+										style={{
+											backgroundImage:
+												"url('https://www.transparenttextures.com/patterns/concrete-wall.png')",
+											borderRadius: '0.75rem',
+											boxShadow:
+												'inset 0 0 0 2px rgba(255,255,255,0.1), 0 4px 10px rgba(0,0,0,0.3)',
+										}}
+									></div>
+
+									{/* Hand-drawn border effect */}
+									<div
+										className="absolute inset-0 border-2 border-neutral-600 rounded-lg opacity-20"
+										style={{
+											borderRadius: '0.75rem',
+											borderStyle: 'solid',
+											borderWidth: '2px',
+											borderColor: 'rgba(255,255,255,0.2)',
+											boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.5)',
+										}}
+									></div>
+
+									{/* Table Content */}
+									<div className="relative p-6 z-10">
+										<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+											{/* Day Column */}
+											<div className="space-y-4">
+												{[
+													{ day: 'Monday', hours: '11:00 - 22:00' },
+													{ day: 'Tuesday', hours: '11:00 - 22:00' },
+													{ day: 'Wednesday', hours: '11:00 - 23:00' },
+													{ day: 'Thursday', hours: '11:00 - 23:00' },
+													{ day: 'Friday', hours: '11:00 - 00:00' },
+													{ day: 'Saturday', hours: '12:00 - 00:00' },
+													{ day: 'Sunday', hours: '12:00 - 22:00' },
+												].map((item, index) => (
+													<div key={index} className="flex items-center">
+														<div className="text-red-600 font-bold mr-2">•</div>
+														<div className="flex-1 flex justify-between items-center">
+															<span
+																className="text-white font-bold"
+																style={{
+																	fontFamily: "'Courier New', monospace",
+																}}
+															>
+																{item.day}
+															</span>
+															<div className="flex-grow mx-4 border-b border-dotted border-neutral-600 opacity-50"></div>
+															<span
+																className="text-amber-300"
+																style={{
+																	fontFamily: "'Courier New', monospace",
+																}}
+															>
+																{item.hours}
+															</span>
+														</div>
+													</div>
+												))}
+											</div>
+
+											{/* Notes Column */}
+											<div className="p-4 bg-neutral-900 rounded-lg border border-neutral-700 flex flex-col justify-between">
+												<div>
+													<h4
+														className="text-red-600 font-bold mb-4 uppercase tracking-wide"
+														style={{ fontFamily: "'Courier New', monospace" }}
+													>
+														Special Notes
+													</h4>
+													<ul className="space-y-3">
+														<li className="text-gray-300 text-sm flex items-start">
+															<span className="text-amber-300 mr-2">✓</span>
+															<span>Happy Hour: Monday-Friday 16:00-20:00</span>
+														</li>
+														<li className="text-gray-300 text-sm flex items-start">
+															<span className="text-amber-300 mr-2">✓</span>
+															<span>
+																Live Music: Friday & Saturday from 20:00
+															</span>
+														</li>
+														<li className="text-gray-300 text-sm flex items-start">
+															<span className="text-amber-300 mr-2">✓</span>
+															<span>Taco Tuesday: 25% off all tacos!</span>
+														</li>
+														<li className="text-gray-300 text-sm flex items-start">
+															<span className="text-amber-300 mr-2">✓</span>
+															<span>Sunday Family Special: Kids eat free</span>
+														</li>
+													</ul>
+												</div>
+												<div
+													className="text-xs text-amber-200 mt-4 p-2 border-t border-neutral-700 font-medium uppercase tracking-wider text-center"
+													style={{ fontFamily: "'Courier New', monospace" }}
+												>
+													Kitchen closes 30 minutes before closing time
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
+			</div>
+
+			{/* Truly full-width map container (edge-to-edge) */}
+			<div className="w-full h-[600px] relative">
+				{/* Google Maps integration using map ID */}
+				<iframe
+					className="absolute inset-0 w-full h-full border-0"
+					src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.8331711076716!2d26.10100941554901!3d44.44147297910183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff4770adb5b7%3A0xb89d1b5b2fc13e80!2s123%20Strada%20Mihai%20Eminescu%2C%20Bucure%C8%99ti!5e0!3m2!1sen!2sro!4v1603456384249!5m2!1sen!2sro!3m2!1sid!2s${encodeURIComponent(
+						'b921238f4c767f7'
+					)}!4v1603456384249`}
+					allowFullScreen
+					loading="lazy"
+					referrerPolicy="no-referrer-when-downgrade"
+					title="Taqueria Location Map"
+				></iframe>
 			</div>
 		</Layout>
 	);

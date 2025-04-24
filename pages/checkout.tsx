@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Layout from '../components/Layout';
 import { useCart } from '../lib/cartContext';
 
@@ -71,6 +72,9 @@ const Checkout: React.FC = () => {
 
 	return (
 		<Layout>
+			<Head>
+				<title>Checkout - Taqueria</title>
+			</Head>
 			<div className="max-w-4xl mx-auto">
 				<h1 className="text-3xl font-bold mb-8">Checkout</h1>
 
