@@ -20,7 +20,7 @@ const Cart: React.FC = () => {
 						</p>
 						<Link
 							href="/menu"
-							className="bg-orange-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-600 transition-colors"
+							className="bg-red-900 text-white px-6 py-3 rounded-md font-semibold hover:bg-red-800 transition-colors"
 						>
 							Browse Our Menu
 						</Link>
@@ -48,13 +48,13 @@ const Cart: React.FC = () => {
 						<div className="mt-8 border-t pt-6">
 							<div className="flex justify-between text-xl font-bold mb-8">
 								<span>Total</span>
-								<span>${total.toFixed(2)}</span>
+								<span>{total.toFixed(2)} RON</span>
 							</div>
 
 							<div className="flex justify-end">
 								<Link
 									href="/checkout"
-									className="bg-orange-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-600 transition-colors"
+									className="bg-red-900 text-white px-6 py-3 rounded-md font-semibold hover:bg-red-800 transition-colors"
 								>
 									Proceed to Checkout
 								</Link>

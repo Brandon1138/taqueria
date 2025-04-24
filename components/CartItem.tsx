@@ -32,31 +32,32 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
 			</div>
 			<div className="ml-4 flex-grow">
 				<h3 className="font-medium">{product.name}</h3>
-				<p className="text-gray-500 text-sm">${product.price.toFixed(2)}</p>
+				<p className="text-gray-500 text-sm">{product.price.toFixed(2)} RON</p>
 			</div>
 			<div className="flex items-center">
 				<button
 					onClick={() => handleQuantityChange(quantity - 1)}
-					className="w-8 h-8 flex items-center justify-center border rounded-md"
+					className="w-8 h-8 flex items-center justify-center border rounded-md bg-neutral-100 hover:bg-neutral-200"
 				>
 					-
 				</button>
 				<span className="mx-2 w-8 text-center">{quantity}</span>
 				<button
 					onClick={() => handleQuantityChange(quantity + 1)}
-					className="w-8 h-8 flex items-center justify-center border rounded-md"
+					className="w-8 h-8 flex items-center justify-center border rounded-md bg-neutral-100 hover:bg-neutral-200"
 				>
 					+
 				</button>
 			</div>
-			<div className="ml-6 w-20 text-right">
+			<div className="ml-6 w-24 text-right">
 				<span className="font-medium">
-					${(product.price * quantity).toFixed(2)}
+					{(product.price * quantity).toFixed(2)} RON
 				</span>
 			</div>
 			<button
 				onClick={() => removeFromCart(product.id)}
 				className="ml-4 text-red-500 hover:text-red-700"
+				aria-label="Remove item"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"

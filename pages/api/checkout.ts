@@ -38,10 +38,26 @@ export default async function handler(
 		// Create the use case
 		const createCheckout = new CreateCheckout(paymentGateway);
 
-		// Get the base URL
-		const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-		const host = req.headers.host || 'localhost:3000';
-		const baseUrl = `${protocol}://${host}`;
+		// Get the base URL with more robust handling
+		let baseUrl: string;
+
+		// Check for X-Forwarded-Host and X-Forwarded-Proto headers (for proxied requests)
+		const forwardedHost = req.headers['x-forwarded-host'];
+		const forwardedProto = req.headers['x-forwarded-proto'];
+
+		if (forwardedHost && forwardedProto) {
+			baseUrl = `${forwardedProto}://${forwardedHost}`;
+		} else {
+			// Fallback to regular host detection
+			const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+			const host = req.headers.host || 'localhost:3000';
+			baseUrl = `${protocol}://${host}`;
+		}
+
+		// Properly format baseUrl to ensure it doesn't have a trailing slash
+		if (baseUrl.endsWith('/')) {
+			baseUrl = baseUrl.slice(0, -1);
+		}
 
 		// Execute the use case
 		const checkoutUrl = await createCheckout.execute(

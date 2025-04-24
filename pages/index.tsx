@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import { Product } from '../domain/models/Product';
+import { useCart } from '../lib/cartContext';
 
 interface HomeProps {
 	featuredProducts: Product[];
@@ -53,8 +54,12 @@ const TagStamp: React.FC<{ label: string }> = ({ label }) => {
 };
 
 // Component for a pill-shaped button with street food aesthetic
-const StampButton: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+const StampButton: React.FC<{
+	onClick: () => void;
+	children: React.ReactNode;
+}> = ({ onClick, children }) => (
 	<button
+		onClick={onClick}
 		className="bg-red-900 text-white px-6 py-2 rounded-md font-bold 
 		hover:bg-red-800 focus:ring-2 focus:ring-red-700 focus:outline-none 
 		transition-colors transform hover:-translate-y-0.5 shadow-md border border-red-800
@@ -66,6 +71,13 @@ const StampButton: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 );
 
 const Home: React.FC<HomeProps> = ({ featuredProducts }) => {
+	const { addToCart } = useCart();
+
+	const handleAddToCart = (product: Product) => {
+		addToCart(product);
+		// Toast notification is handled in the CartContext
+	};
+
 	return (
 		<Layout fullWidth={true}>
 			{/* Hero Section */}
@@ -159,7 +171,9 @@ const Home: React.FC<HomeProps> = ({ featuredProducts }) => {
 											>
 												{product.price.toFixed(2)} RON
 											</span>
-											<StampButton>Add to Cart</StampButton>
+											<StampButton onClick={() => handleAddToCart(product)}>
+												Add to Cart
+											</StampButton>
 										</div>
 									</div>
 								</div>

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
 import { useCart } from '../lib/cartContext';
-import { StripePaymentGateway } from '../infrastructure/stripe/StripePaymentGateway';
-import { CreateCheckout } from '../application/use-cases/CreateCheckout';
 
 const Checkout: React.FC = () => {
 	const router = useRouter();
@@ -32,14 +30,36 @@ const Checkout: React.FC = () => {
 			});
 
 			if (!response.ok) {
-				throw new Error('Something went wrong with the checkout process');
+				// Try to get detailed error message from the response
+				let errorMessage = 'Something went wrong with the checkout process';
+				try {
+					const errorData = await response.json();
+					if (errorData && errorData.error) {
+						errorMessage = errorData.error;
+					}
+				} catch (parseError) {
+					// If we can't parse the JSON, use the default error message
+					console.error('Error parsing error response:', parseError);
+				}
+				throw new Error(errorMessage);
 			}
 
-			const { checkoutUrl } = await response.json();
-			window.location.href = checkoutUrl;
+			const data = await response.json();
+
+			// Validate that we have a checkout URL
+			if (!data.checkoutUrl) {
+				throw new Error('No checkout URL returned from the server');
+			}
+
+			// Redirect to Stripe Checkout
+			window.location.href = data.checkoutUrl;
 		} catch (err) {
 			console.error('Checkout error:', err);
-			setError('An error occurred during checkout. Please try again.');
+			setError(
+				err instanceof Error
+					? err.message
+					: 'An error occurred during checkout. Please try again.'
+			);
 		} finally {
 			setLoading(false);
 		}
@@ -69,14 +89,14 @@ const Checkout: React.FC = () => {
 										<span className="text-gray-600 ml-2">x{item.quantity}</span>
 									</div>
 									<span>
-										${(item.product.price * item.quantity).toFixed(2)}
+										{(item.product.price * item.quantity).toFixed(2)} RON
 									</span>
 								</div>
 							))}
 						</div>
 						<div className="mt-4 flex justify-between text-xl font-bold">
 							<span>Total</span>
-							<span>${total.toFixed(2)}</span>
+							<span>{total.toFixed(2)} RON</span>
 						</div>
 					</div>
 
@@ -100,7 +120,7 @@ const Checkout: React.FC = () => {
 							className={`w-full py-3 rounded-md font-semibold ${
 								loading
 									? 'bg-gray-400 cursor-not-allowed'
-									: 'bg-orange-500 text-white hover:bg-orange-600'
+									: 'bg-red-900 text-white hover:bg-red-800'
 							} transition-colors`}
 						>
 							{loading ? 'Processing...' : 'Proceed to Payment'}

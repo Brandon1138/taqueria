@@ -24,12 +24,12 @@ const CartWidget: React.FC = () => {
 				/>
 			</svg>
 			{itemCount > 0 && (
-				<span className="absolute -top-2 -right-2 bg-red-900 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+				<span className="absolute -top-2 -right-2 bg-white text-black border border-gray-300 rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
 					{itemCount}
 				</span>
 			)}
 			{total > 0 && (
-				<span className="ml-2 font-semibold">${total.toFixed(2)}</span>
+				<span className="ml-2 font-semibold">{total.toFixed(2)} RON</span>
 			)}
 		</Link>
 	);

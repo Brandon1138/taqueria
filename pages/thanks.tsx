@@ -3,15 +3,18 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
 import { useCart } from '../lib/cartContext';
+import { useToast } from '../components/ToastProvider';
 
 const Thanks: React.FC = () => {
 	const router = useRouter();
 	const { clearCart } = useCart();
+	const { showToast } = useToast();
 
 	// Clear cart on successful payment
 	useEffect(() => {
 		clearCart();
-	}, [clearCart]);
+		showToast('Order completed successfully!', 'success', 5000);
+	}, [clearCart, showToast]);
 
 	return (
 		<Layout>
@@ -42,13 +45,13 @@ const Thanks: React.FC = () => {
 				<div className="flex flex-col md:flex-row justify-center gap-4">
 					<Link
 						href="/menu"
-						className="bg-orange-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-600 transition-colors"
+						className="bg-red-900 text-white px-6 py-3 rounded-md font-semibold hover:bg-red-800 transition-colors"
 					>
 						Order More Food
 					</Link>
 					<Link
 						href="/"
-						className="border-2 border-orange-500 text-orange-500 px-6 py-3 rounded-md font-semibold hover:bg-orange-500 hover:text-white transition-colors"
+						className="border-2 border-red-900 text-red-900 px-6 py-3 rounded-md font-semibold hover:bg-red-900 hover:text-white transition-colors"
 					>
 						Back to Home
 					</Link>
