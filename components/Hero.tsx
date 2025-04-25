@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import ParallaxScroll from './ParallaxScroll';
 import SmoothScroll from './SmoothScroll';
+import Link from 'next/link';
 
 interface HeroProps {
 	title?: string;
@@ -12,6 +13,31 @@ const Hero: React.FC<HeroProps> = ({
 	title = 'Welcome to Taqueria',
 	subtitle = 'Authentic Mexican Street Food',
 }) => {
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		// Check if we're on client-side
+		if (typeof window !== 'undefined') {
+			const checkIfMobile = () => {
+				setIsMobile(window.innerWidth < 768);
+			};
+
+			// Initial check
+			checkIfMobile();
+
+			// Add event listener for window resize
+			window.addEventListener('resize', checkIfMobile);
+
+			// Cleanup
+			return () => window.removeEventListener('resize', checkIfMobile);
+		}
+	}, []);
+
+	// Logo source based on screen size
+	const logoSrc = isMobile
+		? '/taqueria_logo_bg_small.svg'
+		: '/taqueria_logo_bg.svg';
+
 	return (
 		<div className="relative h-screen w-full -mt-16">
 			{/* Video background */}
@@ -48,14 +74,14 @@ const Hero: React.FC<HeroProps> = ({
 
 				{/* Background logo - static positioning instead of parallax */}
 				<div className="absolute top-0 left-0 w-full h-full pointer-events-none z-10">
-					<div className="absolute top-[20%] left-0 w-full flex justify-center">
+					<div className="absolute top-[20%] left-0 w-full flex justify-center px-8 sm:px-12">
 						<ParallaxScroll
 							speed={1.2}
 							direction="down"
-							className="w-full max-w-5xl h-64 relative"
+							className="w-full max-w-[85%] sm:max-w-[90%] md:max-w-5xl h-64 relative"
 						>
 							<Image
-								src="/taqueria_logo_bg.svg"
+								src={logoSrc}
 								alt="Background Effect"
 								fill
 								className="object-contain"
@@ -68,10 +94,23 @@ const Hero: React.FC<HeroProps> = ({
 					</div>
 				</div>
 
-				<ParallaxScroll speed={0.8} direction="down" className="z-20">
-					<p className="text-xl md:text-2xl text-white text-center max-w-2xl font-medium relative z-20">
+				<ParallaxScroll speed={0.8} direction="down" className="z-20 -mt-2">
+					<p className="text-xl md:text-2xl text-white text-center max-w-2xl font-medium relative z-20 mb-6">
 						{subtitle}
 					</p>
+				</ParallaxScroll>
+
+				{/* Order Now Button */}
+				<ParallaxScroll speed={0.6} direction="down" className="z-20 mt-8">
+					<Link
+						href="/menu"
+						className="bg-white text-red-900 px-6 py-3 rounded-md font-bold 
+						transition-colors hover:bg-transparent hover:text-white
+						uppercase tracking-wide border border-white text-sm md:text-base inline-block"
+						style={{ fontFamily: "'Courier New', monospace" }}
+					>
+						Order Now
+					</Link>
 				</ParallaxScroll>
 
 				{/* Contact information and social media */}

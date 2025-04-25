@@ -118,7 +118,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 				</div>
 			)}
 			{product.tags?.includes('Chef Recommends') && (
-				<div className="absolute right-1/4 top-1/2 opacity-10 transform -rotate-15 text-5xl font-extrabold text-neutral-400 pointer-events-none z-0">
+				<div className="absolute right-4 top-4 opacity-10 transform -rotate-15 text-5xl font-extrabold text-neutral-400 pointer-events-none z-0">
 					CHEF'S
 				</div>
 			)}
