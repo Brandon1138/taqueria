@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import CartWidget from './CartWidget';
@@ -9,8 +9,14 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+	const toggleMenu = () => {
+		setIsMenuOpen(!isMenuOpen);
+	};
+
 	return (
-		<div className="min-h-screen flex flex-col">
+		<div className="min-h-screen flex flex-col bg-neutral-900">
 			<header className="fixed top-0 left-0 right-0 bg-red-900 text-white shadow-md z-50">
 				<div className="container mx-auto px-6 flex justify-between items-center h-16">
 					<Link href="/" className="flex items-center">
@@ -22,18 +28,236 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 							priority
 						/>
 					</Link>
-					<nav className="flex items-center space-x-6">
-						<Link href="/menu" className="hover:underline">
-							Menu
+
+					{/* Main Navigation - Order Now CTA and Cart Widget */}
+					<div className="flex items-center space-x-4">
+						<Link
+							href="/menu"
+							className="bg-transparent text-white px-4 py-2 rounded-md font-bold 
+							transition-colors transform hover:-translate-y-0.5 hover:bg-white hover:text-red-900
+							uppercase tracking-wide hidden sm:block border border-white"
+							style={{ fontFamily: "'Courier New', monospace" }}
+						>
+							Order Now
 						</Link>
+
+						{/* Hamburger Menu Button (now for all screen sizes) */}
+						<button
+							onClick={toggleMenu}
+							className="p-2 focus:outline-none"
+							aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+							aria-expanded={isMenuOpen}
+						>
+							<svg
+								className="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								{isMenuOpen ? (
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M6 18L18 6M6 6l12 12"
+									/>
+								) : (
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M4 6h16M4 12h16M4 18h16"
+									/>
+								)}
+							</svg>
+						</button>
+
 						<CartWidget />
-					</nav>
+					</div>
 				</div>
+
+				{/* Hamburger Menu for all screen sizes - slides from right */}
+				<div
+					className={`fixed top-0 right-0 h-full w-64 bg-red-900 shadow-lg transform transition-transform duration-300 ease-in-out z-50 overflow-y-auto ${
+						isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+					}`}
+				>
+					<div className="px-4 py-6 space-y-6">
+						{/* Close button */}
+						<div className="flex justify-end">
+							<button
+								onClick={toggleMenu}
+								className="text-white focus:outline-none"
+								aria-label="Close menu"
+							>
+								<svg
+									className="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M6 18L18 6M6 6l12 12"
+									/>
+								</svg>
+							</button>
+						</div>
+
+						{/* Menu logo */}
+						<div className="flex justify-center mb-6">
+							<Image
+								src="/taqueria_logo_white.svg"
+								alt="Taqueria Logo"
+								width={120}
+								height={30}
+								priority
+							/>
+						</div>
+
+						{/* Mobile-only Order Now button */}
+						<Link
+							href="/menu"
+							className="block w-full text-center py-3 rounded-md text-base font-medium bg-transparent border border-white text-white hover:bg-white hover:text-red-900 transition-colors sm:hidden"
+							onClick={() => setIsMenuOpen(false)}
+						>
+							Order Now
+						</Link>
+
+						{/* Navigation Links */}
+						<nav className="space-y-4">
+							<Link
+								href="/"
+								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-red-800 pb-2"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								Home
+							</Link>
+							<Link
+								href="/#featured"
+								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-red-800 pb-2"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								Featured Items
+							</Link>
+							<Link
+								href="/#dishes"
+								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-red-800 pb-2"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								Dishes
+							</Link>
+							<Link
+								href="/#happy-hour"
+								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-red-800 pb-2"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								Happy Hour
+							</Link>
+							<Link
+								href="/#app"
+								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-red-800 pb-2"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								Mobile App
+							</Link>
+							<Link
+								href="/#contact"
+								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-red-800 pb-2"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								Contact
+							</Link>
+						</nav>
+
+						{/* Menu button added between Contact and social media section */}
+						<div className="mt-6 pt-6 border-t border-red-800">
+							<Link
+								href="/menu"
+								className="block w-full text-center py-3 rounded-md text-base font-medium bg-white text-red-900 hover:bg-red-200 transition-colors"
+								onClick={() => setIsMenuOpen(false)}
+							>
+								Menu
+							</Link>
+						</div>
+
+						{/* Social media links */}
+						<div className="mt-6 pt-6 border-t border-red-800">
+							<p className="text-white text-sm mb-4">Follow us:</p>
+							<div className="flex space-x-4 justify-center">
+								<a
+									href="https://www.facebook.com/taqueria.ro/"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Visit our Facebook page"
+									className="text-white hover:text-red-200"
+								>
+									<svg
+										className="w-6 h-6"
+										fill="currentColor"
+										viewBox="0 0 24 24"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path d="M12.001 2C6.47813 2 2.00098 6.47715 2.00098 12C2.00098 16.9913 5.65783 21.1283 10.4385 21.8785V14.8906H7.89941V12H10.4385V9.79688C10.4385 7.29063 11.9314 5.90625 14.2156 5.90625C15.3097 5.90625 16.4541 6.10156 16.4541 6.10156V8.5625H15.1931C13.9509 8.5625 13.5635 9.33334 13.5635 10.1242V12H16.3369L15.8936 14.8906H13.5635V21.8785C18.3441 21.1283 22.001 16.9913 22.001 12C22.001 6.47715 17.5238 2 12.001 2Z" />
+									</svg>
+								</a>
+								<a
+									href="https://x.com/Taqueria_Ro"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Visit our Twitter page"
+									className="text-white hover:text-red-200"
+								>
+									<svg
+										className="w-6 h-6"
+										fill="currentColor"
+										viewBox="0 0 24 24"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+									</svg>
+								</a>
+								<a
+									href="https://www.instagram.com/taqueria.ro/"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Visit our Instagram page"
+									className="text-white hover:text-red-200"
+								>
+									<svg
+										className="w-6 h-6"
+										fill="currentColor"
+										viewBox="0 0 24 24"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path d="M12.001 6.50195C8.96875 6.50195 6.50195 8.96875 6.50195 12.001C6.50195 15.0332 8.96875 17.5 12.001 17.5C15.0332 17.5 17.5 15.0332 17.5 12.001C17.5 8.96875 15.0332 6.50195 12.001 6.50195ZM12.001 15.459C10.1187 15.459 8.54297 13.8833 8.54297 12.001C8.54297 10.1187 10.1187 8.54297 12.001 8.54297C13.8833 8.54297 15.459 10.1187 15.459 12.001C15.459 13.8833 13.8833 15.459 12.001 15.459ZM18.6177 6.30079C18.6177 7.00391 18.0498 7.57178 17.3467 7.57178C16.6436 7.57178 16.0757 7.00391 16.0757 6.30079C16.0757 5.59766 16.6436 5.02979 17.3467 5.02979C18.0498 5.02979 18.6177 5.59766 18.6177 6.30079ZM21.9511 7.58936C21.8789 5.97852 21.4827 4.53126 20.292 3.3405C19.1013 2.14973 17.654 1.75355 16.0432 1.68139C14.376 1.59766 9.62598 1.59766 7.95876 1.68139C6.34792 1.75355 4.90066 2.14973 3.70989 3.3405C2.51911 4.53126 2.12293 5.97852 2.05077 7.58936C1.96704 9.25659 1.96704 14.0066 2.05077 15.6738C2.12293 17.2847 2.51911 18.7319 3.70989 19.9227C4.90066 21.1135 6.34792 21.5096 7.95876 21.5818C9.62598 21.6655 14.376 21.6655 16.0432 21.5818C17.654 21.5096 19.1013 21.1135 20.292 19.9227C21.4827 18.7319 21.8789 17.2847 21.9511 15.6738C22.0348 14.0066 22.0348 9.25659 21.9511 7.58936ZM19.6514 17.4541C19.2744 18.3745 18.5538 19.0951 17.6334 19.4721C16.2354 20.0225 13.1006 19.9023 12.001 19.9023C10.9014 19.9023 7.76661 20.0225 6.36864 19.4721C5.44825 19.0951 4.72766 18.3745 4.35059 17.4541C3.80019 16.0562 3.92043 12.9214 3.92043 12.001C3.92043 11.0806 3.80019 7.94575 4.35059 6.54778C4.72766 5.62739 5.44825 4.9068 6.36864 4.52973C7.76661 3.97934 10.9014 4.09958 12.001 4.09958C13.1006 4.09958 16.2354 3.97934 17.6334 4.52973C18.5538 4.9068 19.2744 5.62739 19.6514 6.54778C20.2018 7.94575 20.0816 11.0806 20.0816 12.001C20.0816 12.9214 20.2018 16.0562 19.6514 17.4541Z" />
+									</svg>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{/* Overlay when menu is open */}
+				{isMenuOpen && (
+					<div
+						className="fixed inset-0 bg-black bg-opacity-50 z-40"
+						onClick={toggleMenu}
+						aria-hidden="true"
+					></div>
+				)}
 			</header>
 			<main
-				className={`flex-grow pt-16 ${
+				className={`flex-grow pt-16 w-full ${
 					fullWidth ? '' : 'container mx-auto px-6'
 				}`}
+				style={{
+					backgroundImage:
+						"url('https://www.transparenttextures.com/patterns/concrete-wall.png')",
+					backgroundAttachment: 'fixed',
+				}}
 			>
 				{children}
 			</main>
@@ -60,59 +284,51 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 							<p className="mb-2">Follow us on:</p>
 							<div className="flex justify-between" style={{ width: '188px' }}>
 								<a
-									href="https://facebook.com"
+									href="https://www.facebook.com/taqueria.ro/"
 									target="_blank"
 									rel="noopener noreferrer"
 									aria-label="Visit our Facebook page"
-									className="bg-red-800 rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-700 transition-colors shadow-sm border border-red-700"
+									className="bg-[#8B1A1A] rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-700 transition-colors shadow-md"
 								>
 									<svg
 										className="w-5 h-5"
 										fill="currentColor"
 										viewBox="0 0 24 24"
-										aria-hidden="true"
+										xmlns="http://www.w3.org/2000/svg"
 									>
-										<path
-											fillRule="evenodd"
-											d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-											clipRule="evenodd"
-										/>
+										<path d="M12.001 2C6.47813 2 2.00098 6.47715 2.00098 12C2.00098 16.9913 5.65783 21.1283 10.4385 21.8785V14.8906H7.89941V12H10.4385V9.79688C10.4385 7.29063 11.9314 5.90625 14.2156 5.90625C15.3097 5.90625 16.4541 6.10156 16.4541 6.10156V8.5625H15.1931C13.9509 8.5625 13.5635 9.33334 13.5635 10.1242V12H16.3369L15.8936 14.8906H13.5635V21.8785C18.3441 21.1283 22.001 16.9913 22.001 12C22.001 6.47715 17.5238 2 12.001 2Z" />
 									</svg>
 								</a>
 								<a
-									href="https://twitter.com"
+									href="https://x.com/Taqueria_Ro"
 									target="_blank"
 									rel="noopener noreferrer"
 									aria-label="Visit our Twitter page"
-									className="bg-red-800 rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-700 transition-colors shadow-sm border border-red-700"
+									className="bg-[#8B1A1A] rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-700 transition-colors shadow-md"
 								>
 									<svg
 										className="w-5 h-5"
 										fill="currentColor"
 										viewBox="0 0 24 24"
-										aria-hidden="true"
+										xmlns="http://www.w3.org/2000/svg"
 									>
-										<path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+										<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
 									</svg>
 								</a>
 								<a
-									href="https://instagram.com"
+									href="https://www.instagram.com/taqueria.ro/"
 									target="_blank"
 									rel="noopener noreferrer"
 									aria-label="Visit our Instagram page"
-									className="bg-red-800 rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-700 transition-colors shadow-sm border border-red-700"
+									className="bg-[#8B1A1A] rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-700 transition-colors shadow-md"
 								>
 									<svg
 										className="w-5 h-5"
 										fill="currentColor"
 										viewBox="0 0 24 24"
-										aria-hidden="true"
+										xmlns="http://www.w3.org/2000/svg"
 									>
-										<path
-											fillRule="evenodd"
-											d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772a4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-											clipRule="evenodd"
-										/>
+										<path d="M12.001 6.50195C8.96875 6.50195 6.50195 8.96875 6.50195 12.001C6.50195 15.0332 8.96875 17.5 12.001 17.5C15.0332 17.5 17.5 15.0332 17.5 12.001C17.5 8.96875 15.0332 6.50195 12.001 6.50195ZM12.001 15.459C10.1187 15.459 8.54297 13.8833 8.54297 12.001C8.54297 10.1187 10.1187 8.54297 12.001 8.54297C13.8833 8.54297 15.459 10.1187 15.459 12.001C15.459 13.8833 13.8833 15.459 12.001 15.459ZM18.6177 6.30079C18.6177 7.00391 18.0498 7.57178 17.3467 7.57178C16.6436 7.57178 16.0757 7.00391 16.0757 6.30079C16.0757 5.59766 16.6436 5.02979 17.3467 5.02979C18.0498 5.02979 18.6177 5.59766 18.6177 6.30079ZM21.9511 7.58936C21.8789 5.97852 21.4827 4.53126 20.292 3.3405C19.1013 2.14973 17.654 1.75355 16.0432 1.68139C14.376 1.59766 9.62598 1.59766 7.95876 1.68139C6.34792 1.75355 4.90066 2.14973 3.70989 3.3405C2.51911 4.53126 2.12293 5.97852 2.05077 7.58936C1.96704 9.25659 1.96704 14.0066 2.05077 15.6738C2.12293 17.2847 2.51911 18.7319 3.70989 19.9227C4.90066 21.1135 6.34792 21.5096 7.95876 21.5818C9.62598 21.6655 14.376 21.6655 16.0432 21.5818C17.654 21.5096 19.1013 21.1135 20.292 19.9227C21.4827 18.7319 21.8789 17.2847 21.9511 15.6738C22.0348 14.0066 22.0348 9.25659 21.9511 7.58936ZM19.6514 17.4541C19.2744 18.3745 18.5538 19.0951 17.6334 19.4721C16.2354 20.0225 13.1006 19.9023 12.001 19.9023C10.9014 19.9023 7.76661 20.0225 6.36864 19.4721C5.44825 19.0951 4.72766 18.3745 4.35059 17.4541C3.80019 16.0562 3.92043 12.9214 3.92043 12.001C3.92043 11.0806 3.80019 7.94575 4.35059 6.54778C4.72766 5.62739 5.44825 4.9068 6.36864 4.52973C7.76661 3.97934 10.9014 4.09958 12.001 4.09958C13.1006 4.09958 16.2354 3.97934 17.6334 4.52973C18.5538 4.9068 19.2744 5.62739 19.6514 6.54778C20.2018 7.94575 20.0816 11.0806 20.0816 12.001C20.0816 12.9214 20.2018 16.0562 19.6514 17.4541Z" />
 									</svg>
 								</a>
 							</div>

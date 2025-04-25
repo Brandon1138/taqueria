@@ -46,64 +46,77 @@ const Hero: React.FC<HeroProps> = ({
 				{/* Contact information and social media */}
 				<div className="absolute bottom-4 md:bottom-16 w-full max-w-6xl flex flex-col md:flex-row justify-between gap-4 md:gap-0 px-4">
 					{/* Contact information */}
-					<div className="flex items-center justify-between md:justify-start gap-2 md:gap-8 bg-black bg-opacity-50 px-4 md:px-8 py-3 md:py-4 rounded-lg shadow-lg w-full md:w-auto">
+					<div className="flex items-center justify-between md:justify-start gap-2 md:gap-8 px-4 md:px-8 py-3 md:py-4 w-full md:w-auto">
 						{/* Location */}
 						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
-							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md">
-								<svg
-									className="w-5 h-5 md:w-6 md:h-6 text-white"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-									xmlns="http://www.w3.org/2000/svg"
+							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
+								<a
+									href="https://maps.google.com/?q=123+Mihai+Eminescu"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Find us on Google Maps"
 								>
-									<path
-										fillRule="evenodd"
-										d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-										clipRule="evenodd"
-									></path>
-								</svg>
+									<svg
+										className="w-5 h-5 md:w-6 md:h-6 text-white"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											fillRule="evenodd"
+											d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+											clipRule="evenodd"
+										></path>
+									</svg>
+								</a>
 							</div>
-							<div className="text-center">
+							<div className="text-center h-10">
 								<p className="text-xs md:text-sm text-white font-semibold">
-									123 Mihai Bravu, Bucharest
+									123 Mihai Eminescu
 								</p>
 							</div>
 						</div>
 
 						{/* Phone */}
 						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
-							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md">
-								<svg
-									className="w-5 h-5 md:w-6 md:h-6 text-white"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
-								</svg>
+							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
+								<a href="tel:0314058226" aria-label="Call our restaurant">
+									<svg
+										className="w-5 h-5 md:w-6 md:h-6 text-white"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+									</svg>
+								</a>
 							</div>
-							<p className="text-xs md:text-sm text-white font-semibold">
-								0314058226
-							</p>
+							<div className="text-center h-10">
+								<p className="text-xs md:text-sm text-white font-semibold">
+									0314058226
+								</p>
+							</div>
 						</div>
 
 						{/* Hours */}
 						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
-							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md">
-								<svg
-									className="w-5 h-5 md:w-6 md:h-6 text-white"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										fillRule="evenodd"
-										d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-										clipRule="evenodd"
-									></path>
-								</svg>
+							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
+								<a href="#contact" aria-label="View our contact information">
+									<svg
+										className="w-5 h-5 md:w-6 md:h-6 text-white"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											fillRule="evenodd"
+											d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+											clipRule="evenodd"
+										></path>
+									</svg>
+								</a>
 							</div>
-							<div className="flex items-center">
+							<div className="text-center h-10">
 								<p className="text-xs md:text-sm text-white font-semibold">
 									12:00 - 22:00
 								</p>
@@ -112,12 +125,12 @@ const Hero: React.FC<HeroProps> = ({
 					</div>
 
 					{/* Social media icons */}
-					<div className="flex items-center justify-between md:justify-start gap-2 md:gap-8 bg-black bg-opacity-50 px-4 md:px-8 py-3 md:py-4 rounded-lg shadow-lg w-full md:w-auto">
+					<div className="flex items-center justify-between md:justify-start gap-2 md:gap-8 px-4 md:px-8 py-3 md:py-4 w-full md:w-auto">
 						{/* Facebook */}
 						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
 							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
 								<a
-									href="https://facebook.com/taqueria"
+									href="https://www.facebook.com/taqueria.ro/"
 									aria-label="Visit our Facebook page"
 								>
 									<svg
@@ -138,7 +151,7 @@ const Hero: React.FC<HeroProps> = ({
 						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
 							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
 								<a
-									href="https://twitter.com/taqueria"
+									href="https://x.com/Taqueria_Ro"
 									aria-label="Visit our Twitter page"
 								>
 									<svg
@@ -147,19 +160,19 @@ const Hero: React.FC<HeroProps> = ({
 										viewBox="0 0 24 24"
 										xmlns="http://www.w3.org/2000/svg"
 									>
-										<path d="M19.9441 7.92638C19.9568 8.10403 19.9568 8.28173 19.9568 8.45938C19.9568 13.8982 15.8325 20.1216 8.29441 20.1216C5.97207 20.1216 3.81473 19.4492 2.00098 18.2886C2.32867 18.3267 2.64379 18.3394 2.98402 18.3394C4.90645 18.3394 6.67004 17.6924 8.07867 16.5953C6.27746 16.5572 4.76637 15.3838 4.24273 13.7813C4.5 13.8194 4.75723 13.8448 5.02703 13.8448C5.40088 13.8448 5.77469 13.7939 6.1231 13.7051C4.24273 13.3141 2.84668 11.6735 2.84668 9.69231V9.64162C3.39672 9.94416 4.03652 10.1345 4.71371 10.1599C3.62285 9.43349 2.87156 8.18925 2.87156 6.79321C2.87156 6.04193 3.07168 5.35224 3.42012 4.75636C5.44883 7.24923 8.4399 8.85954 11.7502 9.03719C11.6868 8.7347 11.6487 8.41962 11.6487 8.10449C11.6487 5.84259 13.4883 4.00293 15.7568 4.00293C16.9302 4.00293 17.9956 4.49171 18.7469 5.27795C19.6865 5.10034 20.588 4.75635 21.3902 4.28014C21.0873 5.24053 20.4348 6.04198 19.5714 6.54329C20.4094 6.45646 21.2219 6.2279 21.9741 5.9129C21.3902 6.72688 20.6894 7.4528 19.9441 7.92638Z" />
+										<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
 									</svg>
 								</a>
 							</div>
 							<p className="text-xs md:text-sm text-white font-semibold">
-								Twitter
+								X/Twitter
 							</p>
 						</div>
 						{/* Instagram */}
 						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
 							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
 								<a
-									href="https://instagram.com/taqueria"
+									href="https://www.instagram.com/taqueria.ro/"
 									aria-label="Visit our Instagram page"
 								>
 									<svg

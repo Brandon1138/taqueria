@@ -75,45 +75,49 @@ const Checkout: React.FC = () => {
 			<Head>
 				<title>Checkout - Taqueria</title>
 			</Head>
-			<div className="max-w-4xl mx-auto">
-				<h1 className="text-3xl font-bold mb-8">Checkout</h1>
+			<div className="max-w-4xl mx-auto pt-8">
+				<h1 className="text-3xl font-bold mb-8 text-white">Checkout</h1>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 					{/* Order summary */}
-					<div className="bg-gray-50 p-6 rounded-lg">
-						<h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-						<div className="border-t">
+					<div className="bg-neutral-800 p-6 rounded-lg border border-neutral-700">
+						<h2 className="text-xl font-semibold mb-4 text-white">
+							Order Summary
+						</h2>
+						<div className="border-t border-neutral-700">
 							{items.map((item) => (
 								<div
 									key={item.product.id}
-									className="py-4 flex justify-between border-b"
+									className="py-4 flex justify-between border-b border-neutral-700"
 								>
 									<div>
-										<span className="font-medium">{item.product.name}</span>
-										<span className="text-gray-600 ml-2">x{item.quantity}</span>
+										<span className="font-medium text-white">
+											{item.product.name}
+										</span>
+										<span className="text-gray-400 ml-2">x{item.quantity}</span>
 									</div>
-									<span>
+									<span className="text-amber-300">
 										{(item.product.price * item.quantity).toFixed(2)} RON
 									</span>
 								</div>
 							))}
 						</div>
 						<div className="mt-4 flex justify-between text-xl font-bold">
-							<span>Total</span>
-							<span>{total.toFixed(2)} RON</span>
+							<span className="text-white">Total</span>
+							<span className="text-amber-300">{total.toFixed(2)} RON</span>
 						</div>
 					</div>
 
 					{/* Payment */}
 					<div>
-						<h2 className="text-xl font-semibold mb-4">Payment</h2>
-						<p className="text-gray-600 mb-6">
+						<h2 className="text-xl font-semibold mb-4 text-white">Payment</h2>
+						<p className="text-gray-300 mb-6">
 							Click the button below to proceed to our secure payment
 							processing.
 						</p>
 
 						{error && (
-							<div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+							<div className="bg-red-900 border border-red-700 text-red-100 px-4 py-3 rounded mb-4">
 								{error}
 							</div>
 						)}
@@ -123,7 +127,7 @@ const Checkout: React.FC = () => {
 							disabled={loading}
 							className={`w-full py-3 rounded-md font-semibold ${
 								loading
-									? 'bg-gray-400 cursor-not-allowed'
+									? 'bg-neutral-600 text-neutral-300 cursor-not-allowed'
 									: 'bg-red-900 text-white hover:bg-red-800'
 							} transition-colors`}
 						>

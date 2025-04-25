@@ -3,38 +3,79 @@
 		{
 			"id": "1",
 			"name": "Carnitas Mexican Taco",
-			"description": "4-inch nixtamalized corn flour tortilla, pot-braised pork, yellow onion, cilantro and lime. About 2.65oz, 165kcal. This product cannot be modified and is served at room temperature.",
+			"description": "4-inch nixtamalized corn flour tortilla, pot-braised pork, yellow onion, cilantro and lime. This product cannot be modified and is served at room temperature.",
 			"price": 16.99,
-			"image": "/pork_taco.webp",
+			"image": "/images/pork_taco.webp",
 			"category": "tacos",
-			"tags": ["New", "Chef Recommends"]
+			"tags": ["New", "Chef Recommends"],
+			"nutritionalInfo": {
+				"weight": "2.65oz",
+				"calories": "165kcal"
+			}
 		},
 		{
 			"id": "2",
 			"name": "Pork Burrito",
-			"description": "12\" wheat tortilla, cheese, beans, tomato rice, pulled pork, pico de gallo, lettuce, sour cream, and spicy sauce (we recommend Chipotle Sauce) - approx. 18 oz. This dish is served at room temperature",
+			"description": "12\" wheat tortilla, cheese, beans, tomato rice, pulled pork, pico de gallo, lettuce, sour cream, and spicy sauce (we recommend Chipotle Sauce). This dish is served at room temperature",
 			"price": 54.99,
-			"image": "/pork_burrito.webp",
+			"image": "/images/pork_burrito.webp",
 			"category": "burritos",
-			"tags": ["Chef Recommends"]
+			"tags": ["Chef Recommends"],
+			"nutritionalInfo": {
+				"weight": "18oz",
+				"calories": "850kcal*"
+			}
 		},
 		{
 			"id": "3",
 			"name": "Chorizo Mexican Taco",
-			"description": "4-inch tortilla made from nixtamalized corn flour, homemade chorizo, yellow onion, cilantro, and lime. About 2.65oz, 165kcal. This product cannot be modified and is served at room temperature.",
+			"description": "4-inch tortilla made from nixtamalized corn flour, homemade chorizo, yellow onion, cilantro, and lime. This product cannot be modified and is served at room temperature.",
 			"price": 16.99,
-			"image": "/chorizo_taco.webp",
+			"image": "/images/chorizo_taco.webp",
 			"category": "tacos",
-			"tags": ["New", "Chef Recommends"]
+			"tags": ["New", "Chef Recommends"],
+			"nutritionalInfo": {
+				"weight": "2.65oz",
+				"calories": "165kcal"
+			}
 		},
 		{
 			"id": "4",
 			"name": "Mexican Taco Combo",
-			"description": "Three 4-inch nixtamalized corn flour tortillas with oven-braised beef, pot-braised pork, and homemade chorizo, yellow onion, cilantro, and lime. About 8oz, 490kcal. This product cannot be modified and is served at room temperature.",
+			"description": "Three 4-inch nixtamalized corn flour tortillas with oven-braised beef, pot-braised pork, and homemade chorizo, yellow onion, cilantro, and lime. This product cannot be modified and is served at room temperature.",
 			"price": 49.99,
-			"image": "/mexican_taco_combo.webp",
+			"image": "/images/mexican_taco_combo.webp",
 			"category": "combos",
-			"tags": ["New", "Chef Recommends", "Special Offer"]
+			"tags": ["New", "Chef Recommends", "Special Offer"],
+			"nutritionalInfo": {
+				"weight": "8oz",
+				"calories": "490kcal"
+			}
+		},
+		{
+			"id": "5",
+			"name": "Chicken Quesadilla",
+			"description": "10\" wheat tortilla, cheese, grilled chicken, pico de gallo, sour cream, and spicy sauce (we recommend Verde Sauce) This dish is served at room temperature",
+			"price": 39.99,
+			"image": "/images/chicken_quesadilla.webp",
+			"category": "quesadillas",
+			"nutritionalInfo": {
+				"weight": "14oz",
+				"calories": "610kcal"
+			}
+		},
+		{
+			"id": "6",
+			"name": "Chicken Mexican Taco",
+			"description": "4-inch nixtamalized corn flour tortilla, grilled chicken, yellow onion, cilantro, and lime. This product cannot be modified and is served at room temperature.",
+			"price": 16.99,
+			"image": "/images/chicken_taco.webp",
+			"category": "tacos",
+			"tags": ["New"],
+			"nutritionalInfo": {
+				"weight": "2.65oz",
+				"calories": "145kcal"
+			}
 		}
 	]
 }

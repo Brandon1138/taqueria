@@ -6,4 +6,8 @@ export interface Product {
 	image: string;
 	category: string;
 	tags?: string[]; // Optional array of tag strings like "New", "Chef Recommends", etc.
+	nutritionalInfo?: {
+		weight: string;
+		calories: string;
+	};
 }

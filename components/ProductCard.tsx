@@ -29,19 +29,76 @@ const TagStamp: React.FC<{ label: string }> = ({ label }) => {
 	return (
 		<span
 			className={`inline-block ${stampStyles} text-white text-xs font-bold mr-2 px-3 py-1 rounded transform 
-			shadow-sm border border-opacity-20 border-black uppercase tracking-wider`}
+			shadow-sm border border-opacity-20 border-black uppercase tracking-wider
+			transition-all duration-200 ease-in-out hover:scale-110 hover:shadow-md 
+			hover:z-10 cursor-pointer hover:-translate-y-0.5`}
 			style={{ fontFamily: "'Courier New', monospace" }}
+			onMouseEnter={(e) => {
+				// Random slight rotation on hover for a dynamic effect
+				const rotation = Math.random() * 8 - 4; // Between -4 and 4 degrees
+				e.currentTarget.style.transform = `rotate(${rotation}deg) scale(1.1) translateY(-2px)`;
+				e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
+			}}
+			onMouseLeave={(e) => {
+				// Reset to original rotation from the stampStyles
+				const originalRotation = stampStyles.includes('rotate-3')
+					? '3deg'
+					: stampStyles.includes('-rotate-2')
+					? '-2deg'
+					: stampStyles.includes('rotate-1')
+					? '1deg'
+					: '-1deg';
+				e.currentTarget.style.transform = `rotate(${originalRotation})`;
+				e.currentTarget.style.boxShadow = '';
+			}}
 		>
 			{label}
 		</span>
 	);
 };
 
+// Component for displaying nutritional information in a small table
+const NutritionalInfo: React.FC<{ weight: string; calories: string }> = ({
+	weight,
+	calories,
+}) => (
+	<div className="mt-2">
+		<table className="w-full text-sm">
+			<tbody>
+				<tr>
+					<td className="text-gray-400 pr-2">Weight:</td>
+					<td className="text-gray-300 font-medium text-right">{weight}</td>
+				</tr>
+				<tr>
+					<td className="text-gray-400 pr-2">Calories:</td>
+					<td className="text-gray-300 font-medium text-right">{calories}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+);
+
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 	const { addToCart } = useCart();
 
 	return (
-		<div className="relative overflow-hidden h-full transform transition-all hover:scale-102">
+		<div
+			className="relative overflow-hidden h-full transition-all duration-300"
+			onMouseEnter={(e) => {
+				// Add shadow and translateY without scaling up
+				e.currentTarget.style.transform = 'translateY(-5px)';
+				e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.4)';
+
+				// Apply subtle rotation for a "picked up" effect
+				const rotation = Math.random() * 1 - 0.5; // Small random rotation between -0.5 and 0.5 degrees
+				e.currentTarget.style.transform += ` rotate(${rotation}deg)`;
+			}}
+			onMouseLeave={(e) => {
+				// Return to original state
+				e.currentTarget.style.transform = 'translateY(0)';
+				e.currentTarget.style.boxShadow = '';
+			}}
+		>
 			{/* Paper card with texture */}
 			<div
 				className="absolute inset-0 bg-neutral-800 rounded-lg"
@@ -88,14 +145,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 				</div>
 				<div className="p-5 flex flex-col justify-between flex-grow relative">
 					<div>
-						<div className="flex flex-wrap mb-3 -mt-7">
+						<div className="flex flex-wrap mb-3 -mt-9">
 							{product.tags?.map((tag, index) => (
 								<TagStamp key={index} label={tag} />
 							))}
 						</div>
 						<h3
-							className="font-extrabold text-lg text-white mt-2"
-							style={{ fontFamily: 'sans-serif' }}
+							className={`font-extrabold text-lg text-white uppercase tracking-wide ${
+								!product.tags || product.tags.length === 0 ? 'mt-8' : 'mt-2'
+							}`}
+							style={{
+								fontFamily: "'Courier New', monospace",
+								textShadow: '1px 1px 0px rgba(0,0,0,0.8)',
+								transform: 'rotate(-0.5deg)',
+								display: 'inline-block',
+								borderBottom: '2px solid rgba(251, 191, 36, 0.6)',
+								paddingBottom: '4px',
+							}}
 						>
 							{product.name}
 						</h3>
@@ -105,6 +171,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 						>
 							{product.description}
 						</p>
+
+						{product.nutritionalInfo && (
+							<NutritionalInfo
+								weight={product.nutritionalInfo.weight}
+								calories={product.nutritionalInfo.calories}
+							/>
+						)}
 					</div>
 					<div className="mt-3 flex items-center justify-between">
 						<span
@@ -117,9 +190,29 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 							onClick={() => addToCart(product)}
 							className="bg-red-900 text-white px-4 py-1.5 rounded-md font-bold 
 							hover:bg-red-800 focus:ring-2 focus:ring-red-700 focus:outline-none 
-							transition-colors transform hover:-translate-y-0.5 shadow-md border border-red-800
-							uppercase tracking-wide text-sm"
+							transition-all duration-200 transform hover:-translate-y-1 shadow-md border border-red-800
+							uppercase tracking-wide text-sm hover:shadow-lg"
 							style={{ fontFamily: "'Courier New', monospace" }}
+							onMouseEnter={(e) => {
+								e.currentTarget.style.transform =
+									'translateY(-4px) scale(1.05)';
+								e.currentTarget.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
+							}}
+							onMouseLeave={(e) => {
+								e.currentTarget.style.transform = '';
+								e.currentTarget.style.boxShadow = '';
+							}}
+							onMouseDown={(e) => {
+								// Add a "pressed" effect
+								e.currentTarget.style.transform =
+									'translateY(-2px) scale(0.98)';
+								e.currentTarget.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
+							}}
+							onMouseUp={(e) => {
+								e.currentTarget.style.transform =
+									'translateY(-4px) scale(1.05)';
+								e.currentTarget.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
+							}}
 						>
 							Add to Cart
 						</button>

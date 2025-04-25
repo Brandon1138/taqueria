@@ -73,8 +73,10 @@ const Thanks: React.FC = () => {
 					</svg>
 				</div>
 
-				<h1 className="text-3xl font-bold mb-4">Thank You for Your Order!</h1>
-				<p className="text-gray-600 mb-8">
+				<h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+					Thank You for Your Order!
+				</h1>
+				<p className="text-gray-700 dark:text-gray-300 mb-8">
 					Your order has been successfully processed. You'll receive a
 					confirmation email shortly.
 				</p>
@@ -88,7 +90,7 @@ const Thanks: React.FC = () => {
 					</button>
 					<button
 						onClick={goToHome}
-						className="border-2 border-red-900 text-red-900 px-6 py-3 rounded-md font-semibold hover:bg-red-900 hover:text-white transition-colors"
+						className="border-2 border-red-900 text-red-900 dark:text-red-400 dark:border-red-400 px-6 py-3 rounded-md font-semibold hover:bg-red-900 hover:text-white dark:hover:bg-red-900 dark:hover:text-white transition-colors"
 					>
 						Back to Home
 					</button>
