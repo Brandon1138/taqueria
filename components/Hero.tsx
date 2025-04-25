@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
+import ParallaxScroll from './ParallaxScroll';
+import SmoothScroll from './SmoothScroll';
 
 interface HeroProps {
 	title?: string;
@@ -29,24 +31,57 @@ const Hero: React.FC<HeroProps> = ({
 			{/* Content */}
 			<div className="relative h-full w-full flex flex-col items-center justify-center px-4">
 				{/* Logo container with specific dimensions */}
-				<div className="w-full max-w-4xl h-48 relative mb-8">
-					<Image
-						src="/taqueria_logo_bg.svg"
-						alt="Taqueria Logo"
-						fill
-						priority
-						className="object-contain"
-					/>
+				<div className="w-full max-w-4xl h-48 relative mb-8 z-20">
+					<SmoothScroll animation="fade" duration={1200}>
+						<Image
+							src="/taqueria_logo_white.svg"
+							alt="Taqueria Logo"
+							fill
+							priority
+							className="object-contain"
+							style={{
+								filter: 'drop-shadow(0 0 15px rgba(0,0,0,0.7))',
+							}}
+						/>
+					</SmoothScroll>
 				</div>
 
-				<p className="text-xl md:text-2xl text-white text-center max-w-2xl font-medium">
-					{subtitle}
-				</p>
+				{/* Background logo - static positioning instead of parallax */}
+				<div className="absolute top-0 left-0 w-full h-full pointer-events-none z-10">
+					<div className="absolute top-[20%] left-0 w-full flex justify-center">
+						<ParallaxScroll
+							speed={1.2}
+							direction="down"
+							className="w-full max-w-5xl h-64 relative"
+						>
+							<Image
+								src="/taqueria_logo_bg.svg"
+								alt="Background Effect"
+								fill
+								className="object-contain"
+								style={{
+									opacity: 1,
+									filter: 'drop-shadow(0 0 5px rgba(0,0,0,0.3))',
+								}}
+							/>
+						</ParallaxScroll>
+					</div>
+				</div>
+
+				<ParallaxScroll speed={0.8} direction="down" className="z-20">
+					<p className="text-xl md:text-2xl text-white text-center max-w-2xl font-medium relative z-20">
+						{subtitle}
+					</p>
+				</ParallaxScroll>
 
 				{/* Contact information and social media */}
 				<div className="absolute bottom-4 md:bottom-16 w-full max-w-6xl flex flex-col md:flex-row justify-between gap-4 md:gap-0 px-4">
 					{/* Contact information */}
-					<div className="flex items-center justify-between md:justify-start gap-2 md:gap-8 px-4 md:px-8 py-3 md:py-4 w-full md:w-auto">
+					<ParallaxScroll
+						speed={0.3}
+						direction="down"
+						className="flex items-center justify-between md:justify-start gap-2 md:gap-8 px-4 md:px-8 py-3 md:py-4 w-full md:w-auto"
+					>
 						{/* Location */}
 						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
 							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
@@ -122,10 +157,14 @@ const Hero: React.FC<HeroProps> = ({
 								</p>
 							</div>
 						</div>
-					</div>
+					</ParallaxScroll>
 
 					{/* Social media icons */}
-					<div className="flex items-center justify-between md:justify-start gap-2 md:gap-8 px-4 md:px-8 py-3 md:py-4 w-full md:w-auto">
+					<ParallaxScroll
+						speed={0.3}
+						direction="down"
+						className="flex items-center justify-between md:justify-start gap-2 md:gap-8 px-4 md:px-8 py-3 md:py-4 w-full md:w-auto"
+					>
 						{/* Facebook */}
 						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
 							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
@@ -189,11 +228,17 @@ const Hero: React.FC<HeroProps> = ({
 								Instagram
 							</p>
 						</div>
-					</div>
+					</ParallaxScroll>
 				</div>
 
 				{/* Scroll indicator */}
-				<div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
+				<SmoothScroll
+					animation="fade"
+					delay={1500}
+					duration={1000}
+					once={false}
+					className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block"
+				>
 					<svg
 						className="w-6 h-6 text-white"
 						fill="none"
@@ -205,7 +250,7 @@ const Hero: React.FC<HeroProps> = ({
 					>
 						<path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
 					</svg>
-				</div>
+				</SmoothScroll>
 			</div>
 		</div>
 	);

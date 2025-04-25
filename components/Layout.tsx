@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 
 	return (
 		<div className="min-h-screen flex flex-col bg-neutral-900">
-			<header className="fixed top-0 left-0 right-0 bg-red-900 text-white shadow-md z-50">
+			<header className="fixed top-0 left-0 right-0 bg-transparent backdrop-blur-sm text-white z-50">
 				<div className="container mx-auto px-6 flex justify-between items-center h-16">
 					<Link href="/" className="flex items-center">
 						<Image
@@ -78,7 +78,7 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 
 				{/* Hamburger Menu for all screen sizes - slides from right */}
 				<div
-					className={`fixed top-0 right-0 h-full w-64 bg-red-900 shadow-lg transform transition-transform duration-300 ease-in-out z-50 overflow-y-auto ${
+					className={`fixed top-0 right-0 h-full w-64 bg-neutral-900 bg-opacity-80 backdrop-blur-md shadow-lg transform transition-transform duration-300 ease-in-out z-50 overflow-y-auto ${
 						isMenuOpen ? 'translate-x-0' : 'translate-x-full'
 					}`}
 				>
@@ -130,42 +130,42 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 						<nav className="space-y-4">
 							<Link
 								href="/"
-								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-red-800 pb-2"
+								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-neutral-800 pb-2"
 								onClick={() => setIsMenuOpen(false)}
 							>
 								Home
 							</Link>
 							<Link
 								href="/#featured"
-								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-red-800 pb-2"
+								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-neutral-800 pb-2"
 								onClick={() => setIsMenuOpen(false)}
 							>
 								Featured Items
 							</Link>
 							<Link
 								href="/#dishes"
-								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-red-800 pb-2"
+								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-neutral-800 pb-2"
 								onClick={() => setIsMenuOpen(false)}
 							>
 								Dishes
 							</Link>
 							<Link
 								href="/#happy-hour"
-								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-red-800 pb-2"
+								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-neutral-800 pb-2"
 								onClick={() => setIsMenuOpen(false)}
 							>
 								Happy Hour
 							</Link>
 							<Link
 								href="/#app"
-								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-red-800 pb-2"
+								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-neutral-800 pb-2"
 								onClick={() => setIsMenuOpen(false)}
 							>
 								Mobile App
 							</Link>
 							<Link
 								href="/#contact"
-								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-red-800 pb-2"
+								className="block py-2 text-base font-medium text-white hover:text-red-200 border-b border-neutral-800 pb-2"
 								onClick={() => setIsMenuOpen(false)}
 							>
 								Contact
@@ -173,7 +173,7 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 						</nav>
 
 						{/* Menu button added between Contact and social media section */}
-						<div className="mt-6 pt-6 border-t border-red-800">
+						<div className="mt-6 pt-6 border-t border-neutral-800">
 							<Link
 								href="/menu"
 								className="block w-full text-center py-3 rounded-md text-base font-medium bg-white text-red-900 hover:bg-red-200 transition-colors"
@@ -184,7 +184,7 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 						</div>
 
 						{/* Social media links */}
-						<div className="mt-6 pt-6 border-t border-red-800">
+						<div className="mt-6 pt-6 border-t border-neutral-800">
 							<p className="text-white text-sm mb-4">Follow us:</p>
 							<div className="flex space-x-4 justify-center">
 								<a
@@ -274,7 +274,7 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 					</div>
 
 					<div className="text-center md:text-left">
-						<p className="mb-2">123 Mihai Bravu, Bucharest</p>
+						<p className="mb-2">123 Mihai Eminescu, Bucharest</p>
 						<p className="mb-2">Phone: 0314058226</p>
 						<p>E-mail: invoices@taqueria.ro</p>
 					</div>

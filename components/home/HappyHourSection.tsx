@@ -42,47 +42,46 @@ const HappyHourSection: React.FC = () => {
 					}}
 				>
 					{/* Special offer tag */}
-					<div className="absolute top-0 right-0 z-10">
+					<div className="absolute -top-2 -right-2 z-10">
 						<div
-							className="bg-red-600 text-white py-2 px-6 shadow-lg font-bold uppercase tracking-wider text-sm transform rotate-6"
+							className="bg-gradient-to-r from-red-600 to-red-700 text-white py-2 px-6 shadow-lg font-bold uppercase tracking-wider text-sm transform rotate-6 relative overflow-hidden"
 							style={{
 								fontFamily: "'Courier New', monospace",
-								boxShadow: '0 2px 10px rgba(0,0,0,0.3)',
+								boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
+								borderRadius: '4px',
+								textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+								border: '1px solid rgba(255,255,255,0.2)',
 							}}
 						>
-							Special Offer
+							<span className="relative z-10">Special Offer</span>
+							<div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white to-transparent opacity-20"></div>
 						</div>
 					</div>
-
-					{/* Decorative circles */}
-					<div className="absolute top-8 right-8 w-16 h-16 bg-amber-700/30 rounded-full blur-sm"></div>
-					<div className="absolute bottom-10 left-4 w-12 h-12 bg-red-900/20 rounded-full blur-sm"></div>
 
 					<div className="flex flex-col md:flex-row items-center justify-between">
 						{/* Left Side - Promo Image */}
 						<div className="md:w-1/2 flex justify-center relative mb-12 md:mb-0">
 							<div className="relative w-72 h-72 flex items-center justify-center">
-								{/* Happy Hour Banner */}
-								<div className="absolute -top-10 left-1/2 transform -translate-x-1/2 z-20 w-56">
+								{/* Improved Time/Day Info */}
+								<div className="absolute -top-10 left-[45%] transform -translate-x-1/2 z-20 w-64 text-center">
 									<div
-										className="bg-red-800 px-4 py-2 rounded-md shadow-md text-center"
-										style={{
-											boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
-										}}
+										className="text-lg font-bold text-white uppercase tracking-wide"
+										style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}
 									>
-										<div className="text-sm font-medium text-white">
-											Monday - Friday
-										</div>
-										<div className="text-sm font-bold text-amber-300">
-											4:00 PM - 8:00 PM
-										</div>
+										Monday - Friday
+									</div>
+									<div
+										className="text-2xl font-extrabold text-amber-300"
+										style={{ textShadow: '0 2px 6px rgba(0,0,0,0.9)' }}
+									>
+										4:00 PM - 8:00 PM
 									</div>
 								</div>
 
 								{/* Dark background circle */}
 								<div className="bg-neutral-900 w-64 h-64 rounded-full flex items-center justify-center relative">
 									{/* 50% OFF text */}
-									<div className="flex flex-col items-center justify-center text-white translate-x-4">
+									<div className="flex flex-col items-center justify-center text-white">
 										<div
 											className="text-7xl font-extrabold"
 											style={{
@@ -105,13 +104,13 @@ const HappyHourSection: React.FC = () => {
 								</div>
 
 								{/* Cocktail image */}
-								<div className="absolute -left-14 bottom-0 z-10 transform -rotate-6">
-									<div className="relative h-64 w-40">
+								<div className="absolute -left-20 bottom-0 z-10 transform -rotate-6">
+									<div className="relative h-60 w-38">
 										<Image
 											src="/images/cocktail.webp"
 											alt="Cocktail"
-											width={160}
-											height={256}
+											width={150}
+											height={241}
 											style={{ objectFit: 'contain' }}
 											className="drop-shadow-lg"
 										/>
@@ -119,13 +118,13 @@ const HappyHourSection: React.FC = () => {
 								</div>
 
 								{/* Beer image */}
-								<div className="absolute -right-8 bottom-16 z-10 transform rotate-6">
-									<div className="relative h-48 w-24">
+								<div className="absolute -right-8 bottom-[68px] z-10 transform rotate-6">
+									<div className="relative h-44 w-22">
 										<Image
 											src="/images/corona.webp"
 											alt="Beer"
-											width={96}
-											height={192}
+											width={90}
+											height={180}
 											style={{ objectFit: 'contain' }}
 											className="drop-shadow-lg"
 										/>
@@ -133,7 +132,7 @@ const HappyHourSection: React.FC = () => {
 								</div>
 
 								{/* Footer Quote */}
-								<div className="absolute -bottom-10 text-center w-full z-20">
+								<div className="absolute -bottom-10 text-center w-full z-20 -ml-4">
 									<div
 										className="text-xs text-gray-300 font-medium uppercase tracking-wider"
 										style={{ fontFamily: "'Courier New', monospace" }}

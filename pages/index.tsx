@@ -9,6 +9,8 @@ import DishesSection from '../components/home/DishesSection';
 import MobileAppSection from '../components/home/MobileAppSection';
 import HappyHourSection from '../components/home/HappyHourSection';
 import ContactSection from '../components/home/ContactSection';
+import SmoothScroll from '../components/SmoothScroll';
+import ParallaxScroll from '../components/ParallaxScroll';
 
 interface HomeProps {
 	featuredProducts: Product[];
@@ -94,21 +96,31 @@ const Home: React.FC<HomeProps> = ({ featuredProducts }) => {
 			<div className="w-full bg-neutral-900">
 				<div className="w-full max-w-6xl px-4 mx-auto">
 					{/* Featured Items Section */}
-					<FeaturedItems featuredProducts={featuredProducts} />
+					<SmoothScroll animation="fade" duration={1000}>
+						<FeaturedItems featuredProducts={featuredProducts} />
+					</SmoothScroll>
 
 					{/* See our Dishes Section */}
-					<DishesSection />
+					<SmoothScroll animation="slide-up">
+						<DishesSection />
+					</SmoothScroll>
 
 					{/* Mobile App Download Section */}
-					<MobileAppSection />
+					<SmoothScroll animation="slide-left">
+						<MobileAppSection />
+					</SmoothScroll>
 
 					{/* Happy Hour Promotion Section */}
-					<HappyHourSection />
+					<SmoothScroll animation="slide-right">
+						<HappyHourSection />
+					</SmoothScroll>
 				</div>
 			</div>
 
 			{/* Contact Section with Map */}
-			<ContactSection mapEmbedId={mapEmbedId} />
+			<SmoothScroll animation="fade" threshold={0.2}>
+				<ContactSection mapEmbedId={mapEmbedId} />
+			</SmoothScroll>
 		</Layout>
 	);
 };
