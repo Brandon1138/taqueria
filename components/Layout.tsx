@@ -2,6 +2,7 @@ import React, { ReactNode, useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import CartWidget from './CartWidget';
+import CartModal from './CartModal';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface LayoutProps {
@@ -11,11 +12,16 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [isCartModalOpen, setIsCartModalOpen] = useState(false);
 	const [language, setLanguage] = useState('en');
 	const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
+	};
+
+	const toggleCartModal = () => {
+		setIsCartModalOpen(!isCartModalOpen);
 	};
 
 	const toggleLanguageDropdown = () => {
@@ -203,7 +209,7 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 							</svg>
 						</button>
 
-						<CartWidget />
+						<CartWidget onCartClick={toggleCartModal} />
 					</div>
 				</div>
 			</header>
@@ -391,6 +397,12 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 					</>
 				)}
 			</AnimatePresence>
+
+			{/* Cart Modal - moved outside header for proper display */}
+			<CartModal
+				isOpen={isCartModalOpen}
+				onClose={() => setIsCartModalOpen(false)}
+			/>
 
 			<main
 				className={`flex-grow pt-16 w-full ${

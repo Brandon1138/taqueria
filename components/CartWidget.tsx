@@ -1,14 +1,17 @@
 import React from 'react';
-import Link from 'next/link';
 import { useCart } from '../lib/cartContext';
 
-const CartWidget: React.FC = () => {
+interface CartWidgetProps {
+	onCartClick: () => void;
+}
+
+const CartWidget: React.FC<CartWidgetProps> = ({ onCartClick }) => {
 	const { items, total } = useCart();
 
 	const itemCount = items.reduce((count, item) => count + item.quantity, 0);
 
 	return (
-		<Link href="/cart" className="relative flex items-center">
+		<button onClick={onCartClick} className="relative flex items-center">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
@@ -31,7 +34,7 @@ const CartWidget: React.FC = () => {
 			{total > 0 && (
 				<span className="ml-2 font-semibold">{total.toFixed(2)} RON</span>
 			)}
-		</Link>
+		</button>
 	);
 };
 
