@@ -1,8 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import CartWidget from '../../components/CartWidget';
-import CartModal from '../../components/CartModal';
+import React from 'react';
 import Link from 'next/link';
 
 export default function SupabaseProductsLayout({
@@ -10,12 +8,6 @@ export default function SupabaseProductsLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const [isCartModalOpen, setIsCartModalOpen] = useState(false);
-
-	const toggleCartModal = () => {
-		setIsCartModalOpen(!isCartModalOpen);
-	};
-
 	return (
 		<div className="min-h-screen bg-neutral-900 text-white">
 			<header className="bg-neutral-800 p-4 flex justify-between items-center">
@@ -23,11 +15,14 @@ export default function SupabaseProductsLayout({
 					Taqueria
 				</Link>
 				<div className="flex items-center gap-4">
-					<CartWidget onCartClick={toggleCartModal} />
+					{/* Cart functionality temporarily removed for deployment */}
+					<Link href="/" className="text-white hover:text-gray-300">
+						Home
+					</Link>
 				</div>
 			</header>
 			{children}
-			<CartModal isOpen={isCartModalOpen} onClose={toggleCartModal} />
+			{/* Cart modal temporarily removed for deployment */}
 		</div>
 	);
 }
