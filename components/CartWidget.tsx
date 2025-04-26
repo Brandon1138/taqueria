@@ -11,7 +11,11 @@ const CartWidget: React.FC<CartWidgetProps> = ({ onCartClick }) => {
 	const itemCount = items.reduce((count, item) => count + item.quantity, 0);
 
 	return (
-		<button onClick={onCartClick} className="relative flex items-center">
+		<button
+			onClick={onCartClick}
+			className="relative flex items-center"
+			aria-label="Shopping cart"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"

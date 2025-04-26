@@ -118,6 +118,7 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 									alt={language === 'en' ? 'English' : 'Romanian'}
 									width={20}
 									height={15}
+									quality={75}
 									className="rounded-sm"
 								/>
 								<svg
@@ -154,6 +155,7 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 												alt="English"
 												width={20}
 												height={15}
+												quality={75}
 												className="rounded-sm mr-2"
 											/>
 											English
@@ -169,6 +171,7 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 												alt="Romanian"
 												width={20}
 												height={15}
+												quality={75}
 												className="rounded-sm mr-2"
 											/>
 											Română

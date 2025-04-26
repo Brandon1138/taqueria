@@ -26,6 +26,8 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
 					src={product.image}
 					alt={product.name}
 					fill
+					sizes="80px"
+					quality={75}
 					style={{ objectFit: 'cover' }}
 					className="rounded"
 				/>

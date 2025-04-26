@@ -95,6 +95,8 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
 															src={item.product.image}
 															alt={item.product.name}
 															fill
+															sizes="64px"
+															quality={75}
 															style={{ objectFit: 'cover' }}
 															className="rounded-md"
 														/>

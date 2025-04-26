@@ -123,6 +123,7 @@ const Hero: React.FC<HeroProps> = ({
 									src={logoSrc}
 									alt="Background Effect"
 									fill
+									priority
 									className="object-contain"
 									style={{
 										opacity: 1,
