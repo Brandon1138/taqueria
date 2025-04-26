@@ -184,7 +184,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
 											</div>
 
 											<Link
-												href="/cart"
+												href="/checkout"
 												onClick={onClose}
 												className="block w-full text-center py-3 rounded-md text-base font-medium bg-white text-red-900 hover:bg-red-200 transition-colors"
 											>

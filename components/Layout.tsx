@@ -261,15 +261,6 @@ const Layout: React.FC<LayoutProps> = ({ children, fullWidth = false }) => {
 									/>
 								</div>
 
-								{/* Mobile-only Order Now button */}
-								<Link
-									href="/menu"
-									className="block w-full text-center py-3 rounded-md text-base font-medium bg-transparent border border-white text-white hover:bg-white hover:text-red-900 transition-colors sm:hidden"
-									onClick={() => setIsMenuOpen(false)}
-								>
-									Order Now
-								</Link>
-
 								{/* Navigation Links - Reordered */}
 								<nav className="space-y-4">
 									<a
