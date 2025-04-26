@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import CartWidget from '../../components/CartWidget';
 import CartModal from '../../components/CartModal';
