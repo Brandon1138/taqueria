@@ -130,7 +130,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 						src={product.image}
 						alt={product.name}
 						fill
+						sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
 						style={{ objectFit: 'cover' }}
+						quality={75}
 					/>
 					{/* Rough edge paper tear effect */}
 					<div

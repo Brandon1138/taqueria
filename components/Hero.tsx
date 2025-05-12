@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import ParallaxScroll from './ParallaxScroll';
 import SmoothScroll from './SmoothScroll';
@@ -14,6 +14,43 @@ const Hero: React.FC<HeroProps> = ({
 	subtitle = 'Authentic Mexican Street Food',
 }) => {
 	const [isMobile, setIsMobile] = useState(false);
+
+	// Add smooth scroll function
+	const smoothScrollTo = useCallback((id: string) => {
+		// Special case for home - scroll to top
+		if (id === 'home') {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth',
+			});
+			return;
+		}
+
+		// Try to find the element directly
+		const element = document.getElementById(id);
+
+		if (element) {
+			const headerOffset = 80;
+			const elementPosition = element.getBoundingClientRect().top;
+			const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: 'smooth',
+			});
+		} else {
+			console.warn(`Element with id "${id}" not found on the page`);
+		}
+	}, []);
+
+	// Handle navigation link click with prevent default
+	const handleNavLinkClick = (
+		e: React.MouseEvent<HTMLAnchorElement>,
+		id: string
+	) => {
+		e.preventDefault();
+		smoothScrollTo(id);
+	};
 
 	useEffect(() => {
 		// Check if we're on client-side
@@ -55,75 +92,86 @@ const Hero: React.FC<HeroProps> = ({
 			<div className="absolute inset-0 bg-black/50" />
 
 			{/* Content */}
-			<div className="relative h-full w-full flex flex-col items-center justify-center px-4">
-				{/* Logo container with specific dimensions */}
-				<div className="w-full max-w-4xl h-48 relative mb-8 z-20">
-					<SmoothScroll animation="fade" duration={1200}>
-						<Image
-							src="/taqueria_logo_white.svg"
-							alt="Taqueria Logo"
-							fill
-							priority
-							className="object-contain"
-							style={{
-								filter: 'drop-shadow(0 0 15px rgba(0,0,0,0.7))',
-							}}
-						/>
-					</SmoothScroll>
-				</div>
-
-				{/* Background logo - static positioning instead of parallax */}
-				<div className="absolute top-0 left-0 w-full h-full pointer-events-none z-10">
-					<div className="absolute top-[20%] left-0 w-full flex justify-center px-8 sm:px-12">
-						<ParallaxScroll
-							speed={1.2}
-							direction="down"
-							className="w-full max-w-[85%] sm:max-w-[90%] md:max-w-5xl h-64 relative"
-						>
+			<div className="relative h-full w-full flex flex-col justify-between md:justify-center px-4">
+				{/* Upper content container for mobile layout */}
+				<div className="flex flex-col items-center pt-6 md:pt-0 mt-0 md:mt-0">
+					{/* Logo container with specific dimensions */}
+					<div className="w-full max-w-4xl h-24 sm:h-32 md:h-40 lg:h-48 relative mb-0 sm:mb-4 md:mb-6 lg:mb-8 z-20">
+						<SmoothScroll animation="fade" duration={1200}>
 							<Image
-								src={logoSrc}
-								alt="Background Effect"
+								src="/taqueria_logo_white.svg"
+								alt="Taqueria Logo"
 								fill
+								priority
 								className="object-contain"
 								style={{
-									opacity: 1,
-									filter: 'drop-shadow(0 0 5px rgba(0,0,0,0.3))',
+									filter: 'drop-shadow(0 0 15px rgba(0,0,0,0.7))',
 								}}
 							/>
-						</ParallaxScroll>
+						</SmoothScroll>
+					</div>
+
+					{/* Background logo - static positioning instead of parallax */}
+					<div className="absolute top-0 left-0 w-full h-full pointer-events-none z-10">
+						<div className="absolute top-[8%] md:top-[20%] left-0 w-full flex justify-center px-8 sm:px-12">
+							<ParallaxScroll
+								speed={1.2}
+								direction="down"
+								className="w-full max-w-[85%] sm:max-w-[90%] md:max-w-5xl h-64 relative"
+							>
+								<Image
+									src={logoSrc}
+									alt="Background Effect"
+									fill
+									priority
+									className="object-contain"
+									style={{
+										opacity: 1,
+										filter: 'drop-shadow(0 0 5px rgba(0,0,0,0.3))',
+									}}
+								/>
+							</ParallaxScroll>
+						</div>
 					</div>
 				</div>
 
-				<ParallaxScroll speed={0.8} direction="down" className="z-20 -mt-2">
-					<p className="text-xl md:text-2xl text-white text-center max-w-2xl font-medium relative z-20 mb-6">
-						{subtitle}
-					</p>
-				</ParallaxScroll>
+				{/* Middle content - tagline and button */}
+				<div className="flex flex-col items-center z-20 mb-20 sm:mb-16 md:mb-8 lg:mb-0 mt-24 sm:mt-32 md:mt-36 lg:mt-40">
+					<ParallaxScroll speed={0.8} direction="down" className="z-20">
+						<p className="text-lg sm:text-xl md:text-2xl text-white text-center max-w-2xl font-medium relative z-20 mb-10 sm:mb-8 md:mb-10">
+							{subtitle}
+						</p>
+					</ParallaxScroll>
 
-				{/* Order Now Button */}
-				<ParallaxScroll speed={0.6} direction="down" className="z-20 mt-8">
-					<Link
-						href="/menu"
-						className="bg-white text-red-900 px-6 py-3 rounded-md font-bold 
-						transition-colors hover:bg-transparent hover:text-white
-						uppercase tracking-wide border border-white text-sm md:text-base inline-block"
-						style={{ fontFamily: "'Courier New', monospace" }}
+					{/* Order Now Button */}
+					<ParallaxScroll
+						speed={0.6}
+						direction="down"
+						className="z-20 mt-8 sm:mt-10 md:mt-6 lg:mt-8"
 					>
-						Order Now
-					</Link>
-				</ParallaxScroll>
+						<Link
+							href="/menu"
+							className="bg-white text-red-900 px-6 py-3 rounded-md font-bold 
+							transition-colors hover:bg-transparent hover:text-white
+							uppercase tracking-wide border border-white text-sm md:text-base inline-block"
+							style={{ fontFamily: "'Courier New', monospace" }}
+						>
+							Order Now
+						</Link>
+					</ParallaxScroll>
+				</div>
 
 				{/* Contact information and social media */}
-				<div className="absolute bottom-4 md:bottom-16 w-full max-w-6xl flex flex-col md:flex-row justify-between gap-4 md:gap-0 px-4">
+				<div className="w-full max-w-6xl flex flex-col md:flex-row justify-between gap-2 md:gap-0 px-4 mb-8 sm:mb-4 md:mb-16 md:absolute md:bottom-0 md:left-1/2 md:-translate-x-1/2">
 					{/* Contact information */}
 					<ParallaxScroll
 						speed={0.3}
 						direction="down"
-						className="flex items-center justify-between md:justify-start gap-2 md:gap-8 px-4 md:px-8 py-3 md:py-4 w-full md:w-auto"
+						className="flex items-center justify-between md:justify-start gap-1 md:gap-8 px-4 md:px-8 py-2 md:py-4 w-full md:w-auto"
 					>
 						{/* Location */}
-						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
-							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
+						<div className="flex flex-col items-center w-[30%] md:w-24 px-1 md:px-0">
+							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
 								<a
 									href="https://maps.google.com/?q=123+Mihai+Eminescu"
 									target="_blank"
@@ -144,16 +192,16 @@ const Hero: React.FC<HeroProps> = ({
 									</svg>
 								</a>
 							</div>
-							<div className="text-center h-10">
-								<p className="text-xs md:text-sm text-white font-semibold">
+							<div className="text-center h-8 md:h-10 flex items-center">
+								<p className="text-xs md:text-sm text-white font-semibold leading-tight">
 									123 Mihai Eminescu
 								</p>
 							</div>
 						</div>
 
 						{/* Phone */}
-						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
-							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
+						<div className="flex flex-col items-center w-[30%] md:w-24 px-1 md:px-0">
+							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
 								<a href="tel:0314058226" aria-label="Call our restaurant">
 									<svg
 										className="w-5 h-5 md:w-6 md:h-6 text-white"
@@ -165,7 +213,7 @@ const Hero: React.FC<HeroProps> = ({
 									</svg>
 								</a>
 							</div>
-							<div className="text-center h-10">
+							<div className="text-center h-8 md:h-10 flex items-center">
 								<p className="text-xs md:text-sm text-white font-semibold">
 									0314058226
 								</p>
@@ -173,9 +221,13 @@ const Hero: React.FC<HeroProps> = ({
 						</div>
 
 						{/* Hours */}
-						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
-							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
-								<a href="#contact" aria-label="View our contact information">
+						<div className="flex flex-col items-center w-[30%] md:w-24 px-1 md:px-0">
+							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
+								<a
+									href="#contact"
+									aria-label="View our contact information"
+									onClick={(e) => handleNavLinkClick(e, 'contact')}
+								>
 									<svg
 										className="w-5 h-5 md:w-6 md:h-6 text-white"
 										fill="currentColor"
@@ -190,7 +242,7 @@ const Hero: React.FC<HeroProps> = ({
 									</svg>
 								</a>
 							</div>
-							<div className="text-center h-10">
+							<div className="text-center h-8 md:h-10 flex items-center">
 								<p className="text-xs md:text-sm text-white font-semibold">
 									12:00 - 22:00
 								</p>
@@ -202,11 +254,11 @@ const Hero: React.FC<HeroProps> = ({
 					<ParallaxScroll
 						speed={0.3}
 						direction="down"
-						className="flex items-center justify-between md:justify-start gap-2 md:gap-8 px-4 md:px-8 py-3 md:py-4 w-full md:w-auto"
+						className="flex items-center justify-between md:justify-start gap-1 md:gap-8 px-4 md:px-8 py-2 md:py-4 w-full md:w-auto"
 					>
 						{/* Facebook */}
-						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
-							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
+						<div className="flex flex-col items-center w-[30%] md:w-24 px-1 md:px-0">
+							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
 								<a
 									href="https://www.facebook.com/taqueria.ro/"
 									aria-label="Visit our Facebook page"
@@ -221,13 +273,15 @@ const Hero: React.FC<HeroProps> = ({
 									</svg>
 								</a>
 							</div>
-							<p className="text-xs md:text-sm text-white font-semibold">
-								Facebook
-							</p>
+							<div className="text-center h-8 md:h-10 flex items-center">
+								<p className="text-xs md:text-sm text-white font-semibold">
+									Facebook
+								</p>
+							</div>
 						</div>
 						{/* Twitter */}
-						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
-							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
+						<div className="flex flex-col items-center w-[30%] md:w-24 px-1 md:px-0">
+							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
 								<a
 									href="https://x.com/Taqueria_Ro"
 									aria-label="Visit our Twitter page"
@@ -242,13 +296,15 @@ const Hero: React.FC<HeroProps> = ({
 									</svg>
 								</a>
 							</div>
-							<p className="text-xs md:text-sm text-white font-semibold">
-								X/Twitter
-							</p>
+							<div className="text-center h-8 md:h-10 flex items-center">
+								<p className="text-xs md:text-sm text-white font-semibold">
+									X/Twitter
+								</p>
+							</div>
 						</div>
 						{/* Instagram */}
-						<div className="flex flex-col items-center w-20 md:w-24 px-1 md:px-0">
-							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 md:mb-2 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
+						<div className="flex flex-col items-center w-[30%] md:w-24 px-1 md:px-0">
+							<div className="bg-[#8B1A1A] rounded-full p-2 md:p-3 mb-1 shadow-md hover:bg-red-700 transition-colors cursor-pointer">
 								<a
 									href="https://www.instagram.com/taqueria.ro/"
 									aria-label="Visit our Instagram page"
@@ -263,9 +319,11 @@ const Hero: React.FC<HeroProps> = ({
 									</svg>
 								</a>
 							</div>
-							<p className="text-xs md:text-sm text-white font-semibold">
-								Instagram
-							</p>
+							<div className="text-center h-8 md:h-10 flex items-center">
+								<p className="text-xs md:text-sm text-white font-semibold">
+									Instagram
+								</p>
+							</div>
 						</div>
 					</ParallaxScroll>
 				</div>

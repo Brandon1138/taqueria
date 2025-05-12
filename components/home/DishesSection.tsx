@@ -123,6 +123,7 @@ const DishCard: React.FC<{ dish: DishInfo; delay: number }> = ({
 							sizes="(max-width: 768px) 100vw, 33vw"
 							style={{ objectFit: 'cover' }}
 							className="rounded-t-lg transition-transform duration-500 ease-in-out transform"
+							quality={75}
 						/>
 						<div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
 

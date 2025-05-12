@@ -106,6 +106,7 @@ const MobileAppSection: React.FC = () => {
 												alt="Taqueria App Logo"
 												width={40}
 												height={40}
+												quality={75}
 												style={{ objectFit: 'contain' }}
 											/>
 										</div>

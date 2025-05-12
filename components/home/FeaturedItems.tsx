@@ -219,6 +219,7 @@ const FeaturedItems: React.FC<FeaturedItemsProps> = ({ featuredProducts }) => {
 										fill
 										sizes="(max-width: 768px) 100vw, 50vw"
 										style={{ objectFit: 'cover' }}
+										quality={75}
 									/>
 									{/* Rough edge paper tear effect */}
 									<div

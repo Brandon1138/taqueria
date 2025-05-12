@@ -111,6 +111,7 @@ const HappyHourSection: React.FC = () => {
 											alt="Cocktail"
 											width={150}
 											height={241}
+											quality={75}
 											style={{ objectFit: 'contain' }}
 											className="drop-shadow-lg"
 										/>
@@ -125,6 +126,7 @@ const HappyHourSection: React.FC = () => {
 											alt="Beer"
 											width={90}
 											height={180}
+											quality={75}
 											style={{ objectFit: 'contain' }}
 											className="drop-shadow-lg"
 										/>
