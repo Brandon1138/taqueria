@@ -23,7 +23,8 @@ This project follows Clean Architecture principles:
 
 ### Prerequisites
 
-- Node.js 16+ and npm
+- Node.js 18.18.0 or higher
+- npm 9.0.0 or higher
 
 ### Installation
 
